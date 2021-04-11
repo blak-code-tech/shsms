@@ -1,0 +1,29 @@
+#contactForm .h4 {
+  font-weight: 400;
+  border-bottom: 1px solid silver;
+}
+
+#contact-bg {
+  padding-top: 80px;
+}
+
+.pt-2_2 {
+  padding-top: 22px;
+}
+
+#contact-bg {
+  background: url(../../assets/img/background7.jpg)no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+
+.static-map {
+  margin-bottom: 20px;
+}
+
+@media (max-width: 768px) and (min-width: 767px) {
+  #contactForm .static-map img {
+    width: 100%;
+  }
+}
+
