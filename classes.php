@@ -9,7 +9,7 @@ if (isset($_SESSION["id"])) {?>
     if(isset($_REQUEST["eid"])){
         $id = $_REQUEST["eid"];
         if ($id != 0) {
-            $query = ("SELECT * FROM subjects WHERE ID=$id");
+            $query = ("SELECT * FROM classes WHERE ID=$id");
             $check_edit = mysqli_query($conn, $query);
 
             if (!$check_edit) {
@@ -35,7 +35,7 @@ if (isset($_SESSION["id"])) {?>
 
     <header class="container mt-5 px-5 py-5">
         <h1 class="text-center text-muted" data-aos="zoom-in"
-        data-aos-duration="500" style="font-size:50px;">Subjects</h1>
+        data-aos-duration="500" style="font-size:50px;">Classes</h1>
         <hr class="container">
     </header>
 
@@ -51,8 +51,8 @@ if (isset($_SESSION["id"])) {?>
                 <div id="toolbar">
                 <?php if(isset($_SESSION['UserType']) && $_SESSION['UserType'] == 'admin'):?>
                     <!-- Button trigger modal -->
-                    <a data-bs-toggle="modal" data-bs-target="#addSubject" type="button" href="addstudent.php" class="btn btn-primary mx-2">
-                    Add New Subject
+                    <a data-bs-toggle="modal" data-bs-target="#addClass" type="button" href="addstudent.php" class="btn btn-primary mx-2">
+                    Add New Class
                     </a>
                 <?php endif; ?>
                 </div>
@@ -73,18 +73,18 @@ if (isset($_SESSION["id"])) {?>
                         data-page-list="[10,20,30,40,50,All]"
                         data-toolbar="#toolbar">
                                                 
-                    <?php include 'inc/pages/subjectList.php';?>
+                    <?php include 'inc/pages/classList.php';?>
 
                 </table>
             </div>
     </div>
 
         <!-- Add student Modal -->
-        <div class="modal fade" id="addSubject" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="addClass" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Subject's Form</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Class Form</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -94,12 +94,12 @@ if (isset($_SESSION["id"])) {?>
                         <?php echo $msg; ?></div>
                     <?php endif?>
 
-                    <form method="POST" action="inc/addforms/addSubjects.php">
+                    <form method="POST" action="inc/addforms/addClass.php">
                         <div class="row">
                             <!-- First name-->
                             <div class="form-group">
-                                <label for="firstname">Subjects's Name</label>
-                                <input class="form-control" required="" id="SubjectName" name="SubjectName" placeholder="Enter the subject name"/>
+                                <label for="firstname">Class Name</label>
+                                <input class="form-control" required="" id="ClassName" name="ClassName" placeholder="Enter the class name"/>
                                 <br>
                             </div>
 
@@ -115,20 +115,20 @@ if (isset($_SESSION["id"])) {?>
     </div>
     </div>
     <!-- Edit student info Modal -->
-    <div class="modal fade" id="editSubject" tabindex="-1" aria-hidden="true">
+    <div class="modal fade" id="editClass" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Subject's Form</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Class Form</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="inc/editforms/editSubjects.php">
+                    <form method="POST" action="inc/editforms/editClass.php">
                         <input type="hidden" name="eid" value="">
                         <div class="form-group">
                             <!-- subject name-->
-                            <label for="editSubjectName">Subject Name</label>
-                            <input class="form-control" required="" value="" id="editSubjectName" name="editSubjectName" placeholder="Enter the subject name"/>
+                            <label for="editClassName">Class Name</label>
+                            <input class="form-control" required="" value="" id="editClassName" name="editClassName" placeholder="Enter the class name"/>
                             <br>
                         </div>
 
@@ -143,7 +143,7 @@ if (isset($_SESSION["id"])) {?>
     </div>
 
     <!-- Delete student info Modal -->
-    <div class="modal fade" id="deleteSubject" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="deleteClass" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -151,7 +151,7 @@ if (isset($_SESSION["id"])) {?>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="inc/deleteforms/deleteSubjects.php">
+                    <form method="POST" action="inc/deleteforms/deleteClass.php">
                         <input type="hidden" name="did" value="">
                         <h5 class="text-danger"> Are you sure you want to delete this record?</h5>                        <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

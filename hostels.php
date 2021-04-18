@@ -1,5 +1,9 @@
-<?php
+<?php 
     require('config/config.php');
+
+if (isset($_SESSION["id"])) {?>
+
+<?php
     require('config/db.php');
     require('config/fetch_data.php');
 
@@ -47,10 +51,12 @@
                 <?php endif?>
             
                 <div id="toolbar">
+                <?php if(isset($_SESSION['UserType']) && $_SESSION['UserType'] == 'admin'):?>
                     <!-- Button trigger modal -->
                     <a data-bs-toggle="modal" data-bs-target="#addHostel" type="button" href="addstudent.php" class="btn btn-primary mx-2">
                     Add New Hostel
                     </a>
+                <?php endif; ?>
                 </div>
                 <table  data-toggle="table"
                         data-search="true"
@@ -180,3 +186,5 @@
 
 <?php include('inc/footers/mainFooter.php')?>
 <?php include('inc/foots/mainFoot.php')?>
+<?php
+}else header("Location: index.php");?>

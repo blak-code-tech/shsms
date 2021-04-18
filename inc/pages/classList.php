@@ -13,7 +13,7 @@
         
                     $num = 0;
         
-                    $query = "SELECT * FROM subjects";
+                    $query = "SELECT * FROM classes";
         
                     $check = mysqli_query($conn, $query);
         
@@ -31,8 +31,8 @@
                                 <td class="p-2">
                                     <div class="col">
                                         <div class="btn-group" role="group">
-                                            <a data-bs-toggle="modal" data-subjectid="<?php echo $row["ID"]; ?>" href="subjects.php#editSubject"><i class="fa fa-pencil p-1"></i></a>
-                                            <a data-bs-toggle="modal" data-subjectid="<?php echo $row["ID"]; ?>" href="subjects.php#deleteSubject"><i class="fa fa-trash text-danger p-1"></i></a>
+                                            <a data-bs-toggle="modal" data-classid="<?php echo $row["ID"]; ?>" href="classes.php#editClass"><i class="fa fa-pencil p-1"></i></a>
+                                            <a data-bs-toggle="modal" data-classid="<?php echo $row["ID"]; ?>" href="classes.php#deleteClass"><i class="fa fa-trash text-danger p-1"></i></a>
                                         </div>
                                     </div>
         
@@ -42,7 +42,7 @@
         
                                     <?php $num += 1; ?>
                             <?php endwhile ?>
-                            <caption>Number of subjects : <span class="badge bg-success"><?php echo $num ;?></span></caption>
+                            <caption>Number of classes : <span class="badge bg-success"><?php echo $num ;?></span></caption>
                                 <?php
                         }else{
                             echo '<div class="alert alert-info">No Records to Show</div>';

@@ -1,5 +1,9 @@
-<?php
+<?php 
     require('config/config.php');
+
+if (isset($_SESSION["id"])) {?>
+
+<?php
     require('config/db.php');
 
     if(isset($_REQUEST["eid"])){
@@ -46,10 +50,12 @@
                 <?php endif?>
             
                 <div id="toolbar">
+                <?php if(isset($_SESSION['UserType']) && $_SESSION['UserType'] == 'admin'):?>
                     <!-- Button trigger modal -->
                     <a data-bs-toggle="modal" data-bs-target="#addBank" type="button" class="btn btn-primary mx-2">
                     Add New Bank
                     </a>
+                <?php endif;?>
                 </div>
                 <table  data-toggle="table"
                         data-search="true"
@@ -161,8 +167,7 @@
                 <div class="modal-body">
                     <form method="POST" action="inc/deleteforms/deleteBank.php">
                         <input type="hidden" name="did" value="">
-                        <h3 class="text-danger"> Are you sure you want to delete this record?</h3>
-                        <div class="modal-footer">
+                        <h5 class="text-danger"> Are you sure you want to delete this record?</h5>                        <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             <input type="submit" name="deleteSubmit" class="btn btn-danger" value="Delete Record"/>
                         </div>
@@ -174,3 +179,5 @@
 
 <?php include('inc/footers/mainFooter.php')?>
 <?php include('inc/foots/mainFoot.php')?>
+<?php
+}else header("Location: index.php");?>

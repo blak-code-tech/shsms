@@ -29,6 +29,7 @@
                                 <td class="p-2"><?php echo $row["ID"];?></td>
                                 <td class="p-2"><?php echo $row["Name"];?></td> 
                                 <td class="p-2"><?php echo $row["Status"];?></td> 
+                                <?php if(isset($_SESSION['UserType']) && $_SESSION['UserType'] == 'admin'):?>
                                 <td class="p-2">
                                     <div class="col">
                                         <div class="btn-group" role="group">
@@ -38,11 +39,12 @@
                                     </div>
         
                                 </td>
+                                <?php endif; ?>
                             </tr>
         
                                     <?php $num += 1; ?>
                             <?php endwhile ?>
-                            <caption>Number of students : <span class="badge bg-success"><?php echo $num ;?></span></caption>
+                            <caption>Number of hostels : <span class="badge bg-success"><?php echo $num ;?></span></caption>
                                 <?php
                         }else{
                             echo '<div class="alert alert-info">No Records to Show</div>';

@@ -38,7 +38,7 @@ function getitems($table){
    if($result){
        $resultArray = mysqli_fetch_assoc($result);
        while ($row = mysqli_fetch_assoc($result)){
-           echo '<option class="p-2">'.$row["Name"].'</option>';
+           echo '<option class="p-2" value="'.$row["ID"].'">'.$row["Name"].'</option>';
        }
    }
    else{
@@ -117,6 +117,7 @@ function generateEmail($table,$email){
 function updaterecord($table, $id){
    
 }
+
 
 /*
 if(isset($_REQUEST["eid"])){
