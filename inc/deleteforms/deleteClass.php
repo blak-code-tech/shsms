@@ -6,7 +6,7 @@ if (isset($_POST['deleteSubmit'])) {
     var_dump($_POST);
 
     $id = $_POST['did'];
-    $delete_query = ("DELETE FROM students WHERE StudentID='$id'");
+    $delete_query = ("DELETE FROM classes WHERE id=$id");
     $check_delete = mysqli_query($conn, $delete_query);
     if (!$check_delete) {
 
@@ -15,7 +15,7 @@ if (isset($_POST['deleteSubmit'])) {
         $msg = "Record Deleted successfully..";
         $msgClass = "alert-danger";
         echo "all good"; 
-        header("location: http://localhost/shsms/students.php"); 
+        header("location: http://localhost/shsms/classes.php"); 
     }                        
 }
 ?>

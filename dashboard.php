@@ -1,7 +1,11 @@
+<?php 
+    require('config/config.php');
+
+if (isset($_SESSION["id"])) {?>
+
 <?php
-require('config/config.php');
-require('config/db.php');
-require('config/count_records.php');
+    require('config/db.php');
+    require('config/count_records.php');
 ?>
 
 <?php include('inc/headers/mainHeader.php')?>
@@ -10,8 +14,9 @@ require('config/count_records.php');
 
 <header class="container mt-5 col-xxl-8 px-5 py-5">
     <h1 class="text-center text-muted" data-aos="zoom-in"
-     data-aos-duration="500" style="font-size:50px;">Dashboard</h1>
+    data-aos-duration="500" style="font-size:50px;">Dashboard</h1>
     <hr class="container col-xxl-8">
+
 </header>
 
 <section id="dashboad-items" class="container-fluid col-xxl-8 px-5 py-3">
@@ -109,7 +114,7 @@ require('config/count_records.php');
                         </div>
                     </div>
                     <hr>
-                    <a class="btn btn-block hvr-bounce-to-right">View <i class="fa fa-angle-double-right"></i></a>
+                    <a class="btn btn-block hvr-bounce-to-right" href="<?php echo ROOT_URL;?>classes.php">View <i class="fa fa-angle-double-right"></i></a>
 
                 </div>
             </div>
@@ -141,7 +146,7 @@ require('config/count_records.php');
                         </div>
                     </div>
                     <hr>
-                    <a class="btn btn-block hvr-bounce-to-right">View <i class="fa fa-angle-double-right"></i></a>
+                    <a class="btn btn-block hvr-bounce-to-right" href="<?php echo ROOT_URL;?>events.php">View <i class="fa fa-angle-double-right"></i></a>
 
                 </div>
             </div>
@@ -160,7 +165,7 @@ require('config/count_records.php');
                         </div>
                     </div>
                     <hr>
-                    <a class="btn btn-block hvr-bounce-to-right">View <i class="fa fa-angle-double-right"></i></a>
+                    <a class="btn btn-block hvr-bounce-to-right" href="<?php echo ROOT_URL;?>notices.php">View <i class="fa fa-angle-double-right"></i></a>
 
                 </div>
             </div>
@@ -176,7 +181,7 @@ require('config/count_records.php');
                         </div>
                     </div>
                     <hr>
-                    <a class="btn btn-block hvr-bounce-to-right">View <i class="fa fa-angle-double-right"></i></a>
+                    <a class="btn btn-block hvr-bounce-to-right" href="<?php echo ROOT_URL;?>parents.php">View <i class="fa fa-angle-double-right"></i></a>
 
                 </div>
             </div>
@@ -297,3 +302,5 @@ require('config/count_records.php');
 
 <?php include('inc/footers/mainFooter.php')?>
 <?php include('inc/foots/mainFoot.php')?>
+<?php
+}else header("Location: index.php");?>

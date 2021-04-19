@@ -3,12 +3,10 @@
         
         <thead>
             <tr>
-                <th data-field="RegNo" data-sortable="true">Registration No</th>
+                <th data-field="ID" data-sortable="true">ID</th>
+                <th data-field="Name" data-sortable="true">Name</th>
                 <th data-field="Date" data-sortable="true">Date</th>
-                <th data-field="PaidAmount" data-sortable="true">Paid Amount</th>
-                <th data-field="Arrears" data-sortable="true">Arrears</th>
-                <th data-field="Balance" data-sortable="true">Balance</th>
-                <th data-field="Remarks">Remarks</th>
+                <th data-field="Details">Details</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -17,7 +15,7 @@
         
                     $num = 0;
         
-                    $query = "SELECT * FROM feescollection";
+                    $query = "SELECT * FROM events";
         
                     $check = mysqli_query($conn, $query);
         
@@ -29,18 +27,16 @@
         
                             <?php while ($row = mysqli_fetch_assoc($check)):?>
                             <tr class="p-1">
-                                <td class="p-2"><?php echo $row["Student"];?></td>
+                                <td class="p-2"><?php echo $row["ID"];?></td>
+                                <td class="p-2"><?php echo $row["Name"];?></td> 
                                 <td class="p-2"><?php echo $row["Date"];?></td> 
-                                <td class="p-2"><?php echo $row["PaidAmount"];?></td> 
-                                <td class="p-2"><?php echo $row["Arrears"];?></td> 
-                                <td class="p-2"><?php echo $row["Balance"];?></td> 
-                                <td class="p-2"><?php echo $row["Remarks"];?></td> 
+                                <td class="p-2"><?php echo $row["Details"];?></td>
                                 <?php if(isset($_SESSION['UserType']) && $_SESSION['UserType'] == 'admin'):?>
                                 <td class="p-2">
                                     <div class="col">
                                         <div class="btn-group" role="group">
-                                            <a data-bs-toggle="modal" data-feescollectionid="<?php echo $row["ID"]; ?>" href="feescollection.php#editFeesCollection"><i class="fa fa-pencil p-1"></i></a>
-                                            <a data-bs-toggle="modal" data-feescollectionid="<?php echo $row["ID"]; ?>" href="feescollection.php#deleteFeesCollection"><i class="fa fa-trash text-danger p-1"></i></a>
+                                            <a data-bs-toggle="modal" data-eventid="<?php echo $row["ID"]; ?>" href="events.php#editEvent"><i class="fa fa-pencil p-1"></i></a>
+                                            <a data-bs-toggle="modal" data-eventid="<?php echo $row["ID"]; ?>" href="events.php#deleteEvent"><i class="fa fa-trash text-danger p-1"></i></a>
                                         </div>
                                     </div>
         
@@ -50,7 +46,7 @@
         
                                     <?php $num += 1; ?>
                             <?php endwhile ?>
-                            <caption>Number of collections : <span class="badge bg-success"><?php echo $num ;?></span></caption>
+                            <caption>Number of events : <span class="badge bg-success"><?php echo $num ;?></span></caption>
                                 <?php
                         }else{
                             $msg = 'No Records to Show';

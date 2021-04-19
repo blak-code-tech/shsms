@@ -2699,7 +2699,7 @@
 	    icons: {
 	      paginationSwitchDown: 'fa-caret-square-o-down',
 	      paginationSwitchUp: 'fa-caret-square-o-up',
-	      refresh: 'fa-sync',
+	      refresh: 'fa-refresh',
 	      toggleOff: 'fa-toggle-off',
 	      toggleOn: 'fa-toggle-on',
 	      columns: 'fa-th-list',

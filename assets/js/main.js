@@ -1,5 +1,4 @@
 
-
 (function ($) {
     "use strict";
 
@@ -59,7 +58,7 @@
 
 $('#editStudent').on('show.bs.modal', function(e) {
     var studentId = $(e.relatedTarget).data('studentid');
-    
+
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -68,20 +67,13 @@ $('#editStudent').on('show.bs.modal', function(e) {
             results = JSON.parse(results);
             console.log(results);
             $(e.currentTarget).find('input[name="eid"]').val(results[0]);
+            $(e.currentTarget).find('input[name="editStudentID"]').val(results[0]);
             $(e.currentTarget).find('input[name="editFirstName"]').val(results[1]);
             $(e.currentTarget).find('input[name="editLastName"]').val(results[2]);
-            document.getElementById('editGender').value=results[3];
-            //$(e.currentTarget).find('input[name="editGender"]').val(results[3]);
+            $(e.currentTarget).find('select[name="editGender"]').val(results[3]);
             $(e.currentTarget).find('input[name="editDOB"]').val(results[4]);
-            $(e.currentTarget).find('input[name="editRegNo"]').val(results[5]);
-            document.getElementById('editHostel').value=results[6];
-            //$(e.currentTarget).find('input[name="studentid"]').val(results[6]);
-            document.getElementById('editClass').value=results[7];
-            //$(e.currentTarget).find('input[name="studentid"]').val(results[7]);
-            $(e.currentTarget).find('input[name="editTotalFees"]').val(results[8]);
-            $(e.currentTarget).find('input[name="editAdvanceFees"]').val(results[9]);
-            $(e.currentTarget).find('input[name="editBalance"]').val(results[10]);
-            $(e.currentTarget).find('input[name="editGuardian"]').val(results[11]);
+            $(e.currentTarget).find('select[name="editHostelID"]').val(results[5]);
+            $(e.currentTarget).find('select[name="editClassID"]').val(results[6]);
         }
 
     };
@@ -106,7 +98,6 @@ $('#editSubject').on('show.bs.modal', function(e) {
             var results = xmlhttp.responseText;
             results = results.substring(results.indexOf("["), results.indexOf("]")+1);
             results = JSON.parse(results);
-            console.log(results);
             $(e.currentTarget).find('input[name="eid"]').val(results[0]);
             $(e.currentTarget).find('input[name="editSubjectName"]').val(results[1]);
         }
@@ -133,7 +124,6 @@ $('#editBank').on('show.bs.modal', function(e) {
             var results = xmlhttp.responseText;
             results = results.substring(results.indexOf("["), results.indexOf("]")+1);
             results = JSON.parse(results);
-            console.log(results);
             $(e.currentTarget).find('input[name="eid"]').val(results[0]);
             $(e.currentTarget).find('input[name="editBankName"]').val(results[1]);
             $(e.currentTarget).find('input[name="editAccNo"]').val(results[2]);
@@ -157,17 +147,15 @@ $('#editTeacher').on('show.bs.modal', function(e) {
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             var results = xmlhttp.responseText;
-            console.log(results);
             results = results.substring(results.indexOf("["), results.indexOf("]")+1);
             results = JSON.parse(results);
-            console.log(results);
             $(e.currentTarget).find('input[name="eid"]').val(results[0]);
             $(e.currentTarget).find('input[name="editFirstName"]').val(results[1]);
             $(e.currentTarget).find('input[name="editLastName"]').val(results[2]);
             $(e.currentTarget).find('input[name="editDOB"]').val(results[3]);
             $(e.currentTarget).find('input[name="editEmail"]').val(results[4]);
             $(e.currentTarget).find('input[name="editPhone"]').val(results[5]);
-            document.getElementById('editGender').value=results[6];
+            $(e.currentTarget).find('select[name="editGender"]').val(results[6]);
         }
     };
     xmlhttp.open("GET", "teachers.php?eid=" + teacherId, true);
@@ -187,10 +175,8 @@ $('#editFeesCollection').on('show.bs.modal', function(e) {
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             var results = xmlhttp.responseText;
-            console.log(results);
             results = results.substring(results.indexOf("["), results.indexOf("]")+1);
             results = JSON.parse(results);
-            console.log(results);
             $(e.currentTarget).find('input[name="eid"]').val(results[0]);
             $(e.currentTarget).find('input[name="editRegNo"]').val(results[1]);
             $(e.currentTarget).find('input[name="editPaidAmount"]').val(results[2]);
@@ -209,7 +195,6 @@ $('#deleteFeesCollection').on('show.bs.modal', function(e) {
     $(e.currentTarget).find('input[name="did"]').val(feescollectionId);
 });
 
-
 $('#editHostel').on('show.bs.modal', function(e) {
     var hostelId = $(e.relatedTarget).data('hostelid');
 
@@ -217,10 +202,8 @@ $('#editHostel').on('show.bs.modal', function(e) {
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             var results = xmlhttp.responseText;
-            console.log(results);
             results = results.substring(results.indexOf("["), results.indexOf("]")+1);
             results = JSON.parse(results);
-            console.log(results);
             $(e.currentTarget).find('input[name="eid"]').val(results[0]);
             $(e.currentTarget).find('input[name="editName"]').val(results[1]);
             $(e.currentTarget).find('input[name="editStatus"]').val(results[2]);
@@ -235,3 +218,121 @@ $('#deleteHostel').on('show.bs.modal', function(e) {
     var hostelId = $(e.relatedTarget).data('hostelid');
     $(e.currentTarget).find('input[name="did"]').val(hostelId);
 });
+
+$('#editClass').on('show.bs.modal', function(e) {
+    var classId = $(e.relatedTarget).data('classid');
+    console.log(classId);
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            var results = xmlhttp.responseText;
+            console.log(results);
+            results = results.substring(results.indexOf("["), results.indexOf("]")+1);
+            results = JSON.parse(results);
+            $(e.currentTarget).find('input[name="eid"]').val(results[0]);
+            $(e.currentTarget).find('input[name="editClassName"]').val(results[1]);
+        }
+    };
+    xmlhttp.open("GET", "classes.php?eid=" + classId, true);
+    xmlhttp.send();
+    
+
+    /*$(e.currentTarget).find('input[name="studentid"]').val(studentId);*/
+});
+
+$('#deleteClass').on('show.bs.modal', function(e) {
+    var classId = $(e.relatedTarget).data('classid');
+    $(e.currentTarget).find('input[name="did"]').val(classId);
+});
+
+/************************ Parents ***************************/
+$('#editParent').on('show.bs.modal', function(e) {
+    var parentId = $(e.relatedTarget).data('parentid');
+    console.log(parentId);
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            var results = xmlhttp.responseText;
+            console.log(results);
+            results = results.substring(results.indexOf("["), results.indexOf("]")+1);
+            results = JSON.parse(results);
+            $(e.currentTarget).find('input[name="eid"]').val(results[0]);
+            $(e.currentTarget).find('input[name="editParentsFirstName"]').val(results[1]);
+            $(e.currentTarget).find('input[name="editParentsLastName"]').val(results[2]);
+            $(e.currentTarget).find('input[name="editParentsPhone"]').val(results[3]);
+            $(e.currentTarget).find('input[name="editParentsEmail"]').val(results[4]);
+            $(e.currentTarget).find('input[name="editParentsAddress"]').val(results[5]);
+        }
+    };
+    xmlhttp.open("GET", "parents.php?eid=" + parentId, true);
+    xmlhttp.send();
+    
+
+    /*$(e.currentTarget).find('input[name="studentid"]').val(studentId);*/
+});
+
+$('#deleteParent').on('show.bs.modal', function(e) {
+    var parentId = $(e.relatedTarget).data('parentid');
+    $(e.currentTarget).find('input[name="did"]').val(parentId);
+});
+/***********************************************************/
+
+/************************ Events ***************************/
+$('#editEvent').on('show.bs.modal', function(e) {
+    var eventId = $(e.relatedTarget).data('eventid');
+    console.log(eventId);
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            var results = xmlhttp.responseText;
+            console.log(results);
+            results = results.substring(results.indexOf("["), results.indexOf("]")+1);
+            results = JSON.parse(results);
+            $(e.currentTarget).find('input[name="eid"]').val(results[0]);
+            $(e.currentTarget).find('input[name="editEventName"]').val(results[1]);
+            $(e.currentTarget).find('input[name="editEventDate"]').val(results[2]);
+            $(e.currentTarget).find('textarea[name="editEventDetails"]').val(results[3]);
+        }
+    };
+    xmlhttp.open("GET", "events.php?eid=" + eventId, true);
+    xmlhttp.send();
+    
+
+    /*$(e.currentTarget).find('input[name="studentid"]').val(studentId);*/
+});
+
+$('#deleteEvent').on('show.bs.modal', function(e) {
+    var eventId = $(e.relatedTarget).data('eventid');
+    $(e.currentTarget).find('input[name="did"]').val(eventId);
+});
+/***********************************************************/
+
+/************************ Notices ***************************/
+$('#editNotice').on('show.bs.modal', function(e) {
+    var noticeId = $(e.relatedTarget).data('noticeid');
+    console.log(noticeId);
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            var results = xmlhttp.responseText;
+            console.log(results);
+            results = results.substring(results.indexOf("["), results.indexOf("]")+1);
+            results = JSON.parse(results);
+            $(e.currentTarget).find('input[name="eid"]').val(results[0]);
+            $(e.currentTarget).find('input[name="editNoticeName"]').val(results[1]);
+            $(e.currentTarget).find('input[name="editNoticeDate"]').val(results[2]);
+            $(e.currentTarget).find('textarea[name="editNoticeDetails"]').val(results[3]);
+        }
+    };
+    xmlhttp.open("GET", "notices.php?eid=" + noticeId, true);
+    xmlhttp.send();
+    
+
+    /*$(e.currentTarget).find('input[name="studentid"]').val(studentId);*/
+});
+
+$('#deleteNotice').on('show.bs.modal', function(e) {
+    var noticeId = $(e.relatedTarget).data('noticeid');
+    $(e.currentTarget).find('input[name="did"]').val(noticeId);
+});
+/***********************************************************/

@@ -7,22 +7,21 @@ require('../../config/db.php');
         var_dump($_POST);
         $eid = $_POST['eid'];
         $fname = $_POST['editFirstName'];
+        $fname = trim($fname);
+        $fname = ucwords($fname);
         $lname = $_POST['editLastName'];
+        $lname = trim($lname);
+        $lname = ucwords($lname);
         $dob = $_POST['editDOB'];
-        $class = $_POST["editClass"];
+        $classID = $_POST["editClass"];
         $gender = $_POST['editGender'];
-        $hostel = $_POST['editHostel'];
-        $totalFees = $_POST['editTotalFees'];
-        $advanceFees = $_POST['editAdvanceFees'];
-        $balance = $advanceFees - $totalFees;
-        $guardian = $_POST['editGuardian'];
+        $hostelID = $_POST['editHostel'];
 
         if ($eid) {
             # code...
             $query = "UPDATE `students` SET `FirstName`= '$fname',`LastName`='$lname',
-            `Gender`='$gender',`DOB`='$dob',`Hostel`='$hostel',
-            `Class`='$class',`TotalFees`=$totalFees,`AdvanceFees`=$advanceFees,
-            `Balance`=$balance,`Guardian`='$guardian' WHERE ID = $eid";
+            `Gender`='$gender',`DOB`='$dob',`HostelID`=$hostelID,
+            `ClassID`=$classID WHERE StudentID = '$eid'";
 
             $check = mysqli_query($conn, $query);
 

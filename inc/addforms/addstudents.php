@@ -3,30 +3,77 @@ require('../../config/config.php');
 require('../../config/db.php');
 
 if(isset($_POST['addSubmit'])){
-    var_dump($_POST);
-    $fname = $_POST['FirstName'];
-    $lname = $_POST['LastName'];
-    $dob = $_POST['DOB'];
-    $regNo = $_POST['RegNo'];
-    $class = $_POST["Class"];
-    $gender = $_POST['Gender'];
-    $hostel = $_POST['Hostel'];
-    $totalFees = $_POST['TotalFees'];
-    $advanceFees = $_POST['AdvanceFees'];
-    $balance = $advanceFees - $totalFees;
-    $guardian = $_POST['Guardian'];
-     
-    $query = "INSERT INTO `students`(`FirstName`, `LastName`, `Gender`, `DOB`, `RegNo`, `Hostel`, `Class`, `TotalFees`, `AdvanceFees`, `Balance`, `Guardian`) 
-    VALUES ('$fname','$lname','$gender',$dob,'$regNo','$hostel','$class',$totalFees,$advanceFees,$balance,'$guardian')";
-    $check = mysqli_query($conn, $query);
 
-    if (!$check) {
-        die('Query failed'.mysqli_error($conn));   
+    //Students Info
+    $studentID = $_POST['StudentID'];
+    $fname = $_POST['FirstName'];
+    $fname = trim($fname);
+    $fname = ucwords($fname);
+    $lname = $_POST['LastName'];
+    $lname = trim($lname);
+    $lname = ucwords($lname);
+    $dob = $_POST['DOB'];
+    $gender = $_POST['Gender'];
+    $classID = $_POST["Class"];
+    $hostelID = $_POST['Hostel'];
+    //$parentID = $_POST['Guardian'];
+     
+    //Parent's Info
+    $parentFirstName = $_POST['ParentsFirstName'];
+    $parentFirstName = trim($parentFirstName);
+    $parentFirstName = ucwords($parentFirstName);
+    $parentLastName = $_POST['ParentsLastName'];
+    $parentLastName = trim($parentLastName);
+    $parentLastName = ucwords($parentLastName);
+    $parentPhone = $_POST['ParentsPhone'];
+    $parentAddress = $_POST['ParentsAddress'];
+    $parentEmail = $_POST['ParentsEmail'];
+
+    $query = "INSERT INTO `parents`(`FirstName`,`LastName`, `Phone`, `HomeAddress`, `Email`) 
+    VALUES ('$parentFirstName','$parentLastName','$parentPhone','$parentAddress','$parentEmail')";
+    $checkParentQuery = mysqli_query($conn, $query);
+    
+    if (!$checkParentQuery) {
+        die('Query failed: '.mysqli_error($conn));   
     }else{
-        $msg = "Record updated successfully..";
-        $msgClass = "alert-success";
-        echo "all good";
-        header("location: http://localhost/shsms/students.php");
+        $query = "select ID from parents where Phone = '$parentPhone' and Name = '$parentName'";
+        $checkResult = mysqli_query($conn, $query);
+        if (!$checkResult) {
+            die('Query failed: '.mysqli_error($conn));   
+        }else{
+            $row = mysqli_fetch_row($checkResult);
+            var_dump($row);
+            $parentID = $row[0];
+            $query = "INSERT INTO `students`( `StudentID`,`FirstName`, `LastName`, `Gender`, `DOB`, `HostelID`, `ClassID`,`ParentID`) 
+            VALUES ('$studentID','$fname','$lname','$gender','$dob',$hostelID,$classID,$parentID)";
+            $check = mysqli_query($conn, $query);
+
+            if (!$check) {
+                die('Query failed: '.mysqli_error($conn));   
+            }else{
+                $msg = "Record updated successfully..";
+                $msgClass = "alert-success";
+                echo "all good";
+                header("location: http://localhost/shsms/students.php");
+            }
+        }
+        
+    }
+}
+
+function getID($table,$data){
+    require('../../config/db.php');
+
+    $query="SELECT ID FROM $table WHERE Name = $data";
+
+    $query_results = mysqli_query($conn, $query);
+    if (!$query_results) {
+            # code...
+            die('Query failed: '.mysqli_error($conn));
+    }else{
+            $row = mysqli_fetch_array($query_results);
+            $id = $row['ID'];
+            echo $query_results;
     }
 }
 ?>
