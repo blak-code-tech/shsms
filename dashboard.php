@@ -74,12 +74,12 @@ if (isset($_SESSION["id"])) {?>
                     <div class="d-flex justify-content-between">
                         <i class="fa fa-graduation-cap fa-3x text-info"></i>
                         <div class="card-info">
-                            <p class="lead">Teachers</p>
-                            <h5 class="text-right"><?php countrecords("teachers"); ?></5>
+                            <p class="lead">Staff</p>
+                            <h5 class="text-right"><?php countrecords("staff"); ?></5>
                         </div>
                     </div>
                     <hr>
-                    <a class="btn btn-block hvr-bounce-to-right" href="<?php echo ROOT_URL;?>teachers.php">View <i class="fa fa-angle-double-right"></i></a>
+                    <a class="btn btn-block hvr-bounce-to-right" href="<?php echo ROOT_URL;?>staff.php">View <i class="fa fa-angle-double-right"></i></a>
 
                 </div>
             </div>

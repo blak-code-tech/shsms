@@ -10,7 +10,7 @@ if (isset($_SESSION["id"])) {?>
     if(isset($_REQUEST["eid"])){
         $id = $_REQUEST["eid"];
         if ($id != '') {
-            $query = ("SELECT * FROM teachers WHERE StaffID='$id'");
+            $query = ("SELECT * FROM staff WHERE StaffID='$id'");
             $check_edit = mysqli_query($conn, $query);
 
             if (!$check_edit) {
@@ -26,6 +26,7 @@ if (isset($_SESSION["id"])) {?>
                 $myObj[] = $row['Email'];
                 $myObj[] = $row['Phone'];
                 $myObj[] = $row['Gender'];
+                $myObj[] = $row['Position'];
 
                 $myJSON = json_encode($myObj);
 
@@ -42,24 +43,18 @@ if (isset($_SESSION["id"])) {?>
 
     <header class="container mt-5 px-5 py-5">
         <h1 class="text-center text-muted" data-aos="zoom-in"
-        data-aos-duration="500" style="font-size:50px;">Teachers</h1>
+        data-aos-duration="500" style="font-size:50px;">Staff</h1>
         <hr class="container">
     </header>
 
     <div class="container py-3 justify-content-center">
             
             <div class="table-responsive text-center">
-                <?php if($msg != ''):?>
-                    <div class="alert <?php echo $msgClass; ?>">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    <?php echo $msg; ?></div>
-                <?php endif?>
-            
                 <div id="toolbar">
                 <?php if(isset($_SESSION['UserType']) && $_SESSION['UserType'] == 'admin'):?>
                     <!-- Button trigger modal -->
-                    <a data-bs-toggle="modal" data-bs-target="#addTeacher" type="button" class="btn btn-primary mx-2">
-                    Add New Teacher
+                    <a data-bs-toggle="modal" data-bs-target="#addStaff" type="button" class="btn btn-primary mx-2">
+                    Add New Staff
                     </a>
                     <?php endif; ?>
                 </div>
@@ -72,41 +67,53 @@ if (isset($_SESSION["id"])) {?>
                         data-show-toggle="true"
                         data-show-fullscreen="true"
                         data-show-pagination-switch="true"
-                        data-pagination-pre-text="Previous"
-                        data-pagination-next-text="next"
+                        data-pagination-pre-text="Prev"
+                        data-pagination-next-text="Next"
                         data-pagination-h-align="left"
                         data-pagination-detail-h-align="right"
                         data-page-list="[10,20,30,40,50,All]"
                         data-toolbar="#toolbar">
                                                 
-                    <?php include 'inc/pages/teachersList.php';?>
+                    <?php include 'inc/pages/staffList.php';?>
 
                 </table>
             </div>
     </div>
 
-        <!-- Add student Modal -->
-    <div class="modal fade" id="addTeacher" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- Add student Modal -->
+    <div class="modal fade" id="addStaff" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
+                <div class="overlay-loading">
+                    <div class="d-flex justify-content-center m-5">
+                        <div class="spinner-grow text-primary" style="width: 3rem; height: 3rem;" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                    <p class="text-center lead text-secondary"><strong>Processing Form ...</strong></p>
+                </div>
+                <div class="overlay-results">
+                    <div class="text-center">
+                        <i class="fa fa-check bg-success align-middle text-light p-3 mt-4 mb-2" style="font-size:50px;border-radius:60px;"></i>
+                        <p class="lead text-success mb-5"><strong>Record Updated Successfully...</strong></p>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Return to page</button>
+                    </div>
+                </div>
+                <div class="modalContent">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Teacher's Form</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Staff Form</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <?php if($msg != ''):?>
-                        <div class="alert <?php echo $msgClass; ?>">
-                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                        <?php echo $msg; ?></div>
-                    <?php endif?>
 
-                    <form method="POST" action="inc/addforms/addTeachers.php">
+                    <form id="getAddStaff">
 
                         <div class="row">
                             <!-- Staff number Number-->
                             <div class="form-group col-4">
                                 <label for="StaffID">Staff ID</label>
-                                <input class="form-control" type="text" value="<?php generateStaffId();?>" readonly placeholder="Reg no." name="StaffID">
+                                <input class="form-control" type="text" value="<?php generateStaffId();?>"
+                                 readonly placeholder="Reg no." id="StaffID" name="StaffID">
                                 <br>
                             </div>
 
@@ -127,7 +134,7 @@ if (isset($_SESSION["id"])) {?>
                             <!-- Gender-->
                             <div class="form-group col-4">
                                 <label for="gender">Staff's Gender</label>
-                                <select class="form-select" name="Gender" aria-label="Default select example">
+                                <select class="form-select" id="Gender" name="Gender" aria-label="Default select example">
                                     <option disabled selected>Select gender</option>
                                     <option value="Male">Male</option>
                                     <option value="Female">Female</option>
@@ -138,7 +145,7 @@ if (isset($_SESSION["id"])) {?>
                             <!-- DOB-->
                             <div class="form-group col-4">
                                 <label for="dob">Staff's Date of Birth</label>
-                                <input class="form-control" type="date" required="" name="DOB">
+                                <input class="form-control" type="date" required="" id="DOB" name="DOB">
                                 <br>
                             </div>
                             
@@ -148,11 +155,21 @@ if (isset($_SESSION["id"])) {?>
                                 <br>
                             </div>
                         </div>
-
-                        <div class="form-group">
-                            <label for="Phone">Staff's Email</label>
-                            <input class="form-control" required="" id="Email" name="Email" placeholder="Enter the email"/>
-                            <br>
+                        <div class="row">
+                            <div class="form-group col-4">
+                                <label for="position">Staff's Position</label>
+                                <select class="form-select" id="Position" name="Position" aria-label="Default select example">
+                                    <optgroup label="Select Position">
+                                        <?php getitems('positions');?>
+                                    </optgroup>
+                                </select>
+                                <br>
+                            </div>
+                            <div class="form-group col-8">
+                                <label for="Phone">Staff's Email</label>
+                                <input class="form-control" required="" id="Email" name="Email" placeholder="Enter the email"/>
+                                <br>
+                            </div>
                         </div>
 
                         <div class="modal-footer">
@@ -160,26 +177,43 @@ if (isset($_SESSION["id"])) {?>
                             <input type="submit" name="addSubmit" class="btn btn-primary" value="Add Staff"/>
                         </div>
                     </form>
-            </div>
+                </div>
+             </div>
         </div>
     </div>
     </div>
     <!-- Edit teacher info Modal -->
-    <div class="modal fade" id="editTeacher" tabindex="-1" aria-hidden="true">
+    <div class="modal fade" id="editStaff" data-bs-backdrop="static" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
+            <div class="overlay-loading">
+                    <div class="d-flex justify-content-center m-5">
+                        <div class="spinner-grow text-primary" style="width: 3rem; height: 3rem;" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                    <p class="text-center lead text-secondary"><strong>Updating Records ...</strong></p>
+                </div>
+                <div class="overlay-results">
+                    <div class="text-center">
+                        <i class="fa fa-check bg-success align-middle text-light p-3 mt-4 mb-2" style="font-size:50px;border-radius:60px;"></i>
+                        <p class="lead text-success mb-5"><strong>Record Updated Successfully...</strong></p>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Return to page</button>
+                    </div>
+                </div>
+                <div class="modalContent">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Teachers Form</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Staff Form</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="inc/editforms/editTeachers.php">
+                    <form id="getEditStaff">
                         
                         <div class="row">
                             <!-- Staff number Number-->
                             <div class="form-group col-4">
                                 <label for="eid">Staff ID</label>
-                                <input class="form-control" type="text" value="" readonly placeholder="Staff ID" name="eid">
+                                <input class="form-control" type="text" value="" readonly placeholder="Staff ID" id="eid" name="eid">
                                 <br>
                             </div>
 
@@ -211,7 +245,7 @@ if (isset($_SESSION["id"])) {?>
                             <!-- DOB-->
                             <div class="form-group col-4">
                                 <label for="dob">Staff's Date of Birth</label>
-                                <input class="form-control" type="date" required="" name="editDOB">
+                                <input class="form-control" type="date" required="" id="editDOB" name="editDOB">
                                 <br>
                             </div>
                             
@@ -222,10 +256,21 @@ if (isset($_SESSION["id"])) {?>
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="Phone">Staff's Email</label>
-                            <input class="form-control" required="" id="editEmail" name="editEmail" placeholder="Enter the email"/>
-                            <br>
+                        <div class="row">
+                            <div class="form-group col-4">
+                                <label for="position">Staff's Position</label>
+                                <select class="form-select" id="editPosition" name="editPosition" aria-label="Default select example">
+                                    <optgroup label="Select Position">
+                                        <?php getitems('positions');?>
+                                    </optgroup>
+                                </select>
+                                <br>
+                            </div>
+                            <div class="form-group col-8">
+                                <label for="Phone">Staff's Email</label>
+                                <input class="form-control" required="" id="editEmail" name="editEmail" placeholder="Enter the email"/>
+                                <br>
+                            </div>
                         </div>
 
                         <div class="modal-footer">
@@ -234,20 +279,37 @@ if (isset($_SESSION["id"])) {?>
                         </div>
                     </form>
                 </div>
+                </div>
             </div>
         </div>
     </div>
 
     <!-- Delete student info Modal -->
-    <div class="modal fade" id="deleteTeacher" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" data-bs-backdrop="static" id="deleteStaff" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
+            <div class="overlay-loading">
+                <div class="d-flex justify-content-center m-5">
+                    <div class="spinner-grow text-primary" style="width: 5rem; height: 5rem;" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+                <p class="text-center lead text-secondary"><strong>Cleaning Up ...</strong></p>
+            </div>
+            <div class="overlay-results">
+                <div class="text-center">
+                    <i class="fa fa-check bg-success align-middle text-light p-3 mt-4 mb-2" style="font-size:50px;border-radius:60px;"></i>
+                    <p class="lead text-success mb-5"><strong>Record Deleted Successfully...</strong></p>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Return to page</button>
+                </div>
+            </div>
+            <div class="modalContent">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Delete Record</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="inc/deleteforms/deleteTeacher.php">
+                    <form id="getDeleteStaff">
                         <input type="hidden" name="did" value="">
                         <h5 class="text-danger"> Are you sure you want to delete this record?</h5>                        <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -255,6 +317,7 @@ if (isset($_SESSION["id"])) {?>
                         </div>
                     </form>
                 </div>
+            </div>
             </div>
         </div>
     </div>

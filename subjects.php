@@ -81,22 +81,31 @@ if (isset($_SESSION["id"])) {?>
 
         <!-- Add student Modal -->
         <div class="modal fade" id="addSubject" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
+                <div class="overlay-loading">
+                    <div class="d-flex justify-content-center m-5">
+                        <div class="spinner-grow text-primary" style="width: 5rem; height: 5rem;" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                    <p class="text-center lead text-secondary"><strong>Processing Form ...</strong></p>
+                </div>
+                <div class="overlay-results">
+                    <div class="text-center">
+                        <i class="fa fa-check bg-success align-middle text-light p-3 mt-4 mb-2" style="font-size:50px;border-radius:60px;"></i>
+                        <p class="lead text-success mb-5"><strong>Record Added Successfully...</strong></p>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Return to page</button>
+                    </div>
+                </div>
+                <div class="modalContent">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Subject's Form</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <?php if($msg != ''):?>
-                        <div class="alert <?php echo $msgClass; ?>">
-                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                        <?php echo $msg; ?></div>
-                    <?php endif?>
-
-                    <form method="POST" action="inc/addforms/addSubjects.php">
+                    <form id="getAddSubject">
                         <div class="row">
-                            <!-- First name-->
                             <div class="form-group">
                                 <label for="firstname">Subjects's Name</label>
                                 <input class="form-control" required="" id="SubjectName" name="SubjectName" placeholder="Enter the subject name"/>
@@ -109,22 +118,40 @@ if (isset($_SESSION["id"])) {?>
                         </div>
                     </form>
                 </div>
+                </div>
+                
 
             </div>
+            </div>
         </div>
-    </div>
     </div>
     <!-- Edit student info Modal -->
     <div class="modal fade" id="editSubject" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
+            <div class="overlay-loading">
+                    <div class="d-flex justify-content-center m-5">
+                        <div class="spinner-grow text-primary" style="width: 5rem; height: 5rem;" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                    <p class="text-center lead text-secondary"><strong>Updating Record ...</strong></p>
+                </div>
+                <div class="overlay-results">
+                    <div class="text-center">
+                        <i class="fa fa-check bg-success align-middle text-light p-3 mt-4 mb-2" style="font-size:50px;border-radius:60px;"></i>
+                        <p class="lead text-success mb-5"><strong>Record Updated Successfully...</strong></p>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Return to page</button>
+                    </div>
+                </div>
+                <div class="modalContent">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Subject's Form</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="inc/editforms/editSubjects.php">
-                        <input type="hidden" name="eid" value="">
+                    <form id="getEditSubject">
+                        <input type="hidden" id="eid" name="eid" value="">
                         <div class="form-group">
                             <!-- subject name-->
                             <label for="editSubjectName">Subject Name</label>
@@ -138,6 +165,8 @@ if (isset($_SESSION["id"])) {?>
                         </div>
                     </form>
                 </div>
+                </div>
+                
             </div>
         </div>
     </div>
@@ -146,19 +175,37 @@ if (isset($_SESSION["id"])) {?>
     <div class="modal fade" id="deleteSubject" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Delete Record</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form method="POST" action="inc/deleteforms/deleteSubjects.php">
-                        <input type="hidden" name="did" value="">
-                        <h5 class="text-danger"> Are you sure you want to delete this record?</h5>                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <input type="submit" name="deleteSubmit" class="btn btn-danger" value="Delete Record"/>
+                <div class="overlay-loading">
+                    <div class="d-flex justify-content-center m-5">
+                        <div class="spinner-grow text-primary" style="width: 5rem; height: 5rem;" role="status">
+                            <span class="visually-hidden">Loading...</span>
                         </div>
-                    </form>
+                    </div>
+                    <p class="text-center lead text-secondary"><strong>Cleaning Up ...</strong></p>
                 </div>
+                <div class="overlay-results">
+                    <div class="text-center">
+                        <i class="fa fa-check bg-success align-middle text-light p-3 mt-4 mb-2" style="font-size:50px;border-radius:60px;"></i>
+                        <p class="lead text-success mb-5"><strong>Record Deleted Successfully...</strong></p>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Return to page</button>
+                    </div>
+                </div>
+                <div class="modalContent">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Delete Record</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="getDeleteSubject">
+                            <input type="hidden" id="did" name="did" value="">
+                            <h5 class="text-danger"> Are you sure you want to delete this record?</h5>                        <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <input type="submit" name="deleteSubmit" class="btn btn-danger" value="Delete Record"/>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
             </div>
         </div>
     </div>

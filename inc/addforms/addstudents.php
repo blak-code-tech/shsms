@@ -2,13 +2,14 @@
 require('../../config/config.php');
 require('../../config/db.php');
 
-if(isset($_POST['addSubmit'])){
+if(isset($_POST['StudentID'])){
 
     //Students Info
     $studentID = $_POST['StudentID'];
     $fname = $_POST['FirstName'];
     $fname = trim($fname);
     $fname = ucwords($fname);
+    
     $lname = $_POST['LastName'];
     $lname = trim($lname);
     $lname = ucwords($lname);
@@ -36,7 +37,7 @@ if(isset($_POST['addSubmit'])){
     if (!$checkParentQuery) {
         die('Query failed: '.mysqli_error($conn));   
     }else{
-        $query = "select ID from parents where Phone = '$parentPhone' and Name = '$parentName'";
+        $query = "select ID from parents where Phone = '$parentPhone' and FirstName = '$parentFirstName'";
         $checkResult = mysqli_query($conn, $query);
         if (!$checkResult) {
             die('Query failed: '.mysqli_error($conn));   
@@ -49,12 +50,10 @@ if(isset($_POST['addSubmit'])){
             $check = mysqli_query($conn, $query);
 
             if (!$check) {
-                die('Query failed: '.mysqli_error($conn));   
+                die('Query failed'.mysqli_error($conn));
+                echo 'Query failed'.mysqli_error($conn);
             }else{
-                $msg = "Record updated successfully..";
-                $msgClass = "alert-success";
-                echo "all good";
-                header("location: http://localhost/shsms/students.php");
+                echo "OK."; 
             }
         }
         

@@ -2,8 +2,8 @@
 require('../../config/config.php');
 require('../../config/db.php');
 
-if(isset($_POST['addSubmit'])){
-    var_dump($_POST);
+if(isset($_POST['Name']) && isset($_POST['Status'])){
+    
     $hname = $_POST['Name'];
     $status = $_POST['Status'];
      
@@ -12,12 +12,10 @@ if(isset($_POST['addSubmit'])){
     $check = mysqli_query($conn, $query);
 
     if (!$check) {
-        die('Query failed'.mysqli_error($conn));   
+        die('Query failed'.mysqli_error($conn));
+        echo 'Query failed'.mysqli_error($conn);
     }else{
-        $msg = "Record updated successfully..";
-        $msgClass = "alert-success";
-        echo "all good";
-        header("location: http://localhost/shsms/hostels.php");
-    }
+        echo "OK.";
+    }  
 }
 ?>

@@ -2,8 +2,7 @@
 require('../../config/config.php');
 require('../../config/db.php');
 
-if (isset($_POST['deleteSubmit'])) {
-    var_dump($_POST);
+if (isset($_POST['did'])) {
 
     $id = $_POST['did'];
     $delete_query = ("DELETE FROM banks WHERE ID='$id'");
@@ -11,11 +10,10 @@ if (isset($_POST['deleteSubmit'])) {
     if (!$check_delete) {
 
         die(mysqli_error($conn));
+        echo mysqli_error($conn);
     }else{
-        $msg = "Record Deleted successfully..";
-        $msgClass = "alert-danger";
-        echo "all good"; 
-        header("location: http://localhost/shsms/banks.php"); 
+        echo "OK."; 
+        //header("location: http://localhost/shsms/banks.php"); 
     }                        
 }
 ?>

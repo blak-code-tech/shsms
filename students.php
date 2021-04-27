@@ -89,23 +89,36 @@
 <div class="modal fade" id="addStudent" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
+        <div class="overlay-loading">
+                    <div class="d-flex justify-content-center m-5">
+                        <div class="spinner-grow text-primary" style="width: 5rem; height: 5rem;" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                    <p class="text-center lead text-secondary"><strong>Processing Form ...</strong></p>
+                </div>
+                <div class="overlay-results">
+                    <div class="text-center">
+                        <i class="fa fa-check bg-success align-middle text-light p-3 mt-4 mb-2" style="font-size:50px;border-radius:60px;"></i>
+                        <p class="lead text-success mb-5"><strong>Record Added Successfully...</strong></p>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Return to page</button>
+                    </div>
+                </div>
+                <div class="modalContent">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Student's Form</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-            <?php if($msg != ''):?>
-                    <div class="alert <?php echo $msgClass; ?>">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    <?php echo $msg; ?></div>
-                <?php endif?>
-
-                <form method="POST" action="inc/addforms/addStudents.php"">
+                <div class="message" class="alert" role="alert" style="display: none;">
+                </div>
+                
+                <form id="getAddStudent">
                     
                     <!-- Registration Number-->
                     <div class="form-group">
                         <label for="studentID">Student's ID number</label>
-                        <input class="form-control" type="text" value="<?php generateRegNo();?>" readonly placeholder="Reg no." name="StudentID">
+                        <input class="form-control" type="text" value="<?php generateRegNo();?>" readonly placeholder="Reg no." id="StudentID" name="StudentID">
                         <br>
                     </div>
 
@@ -113,21 +126,25 @@
                         <!-- First name-->
                         <div class="form-group col-4">
                             <label for="firstname">Student's First Name</label>
-                            <input class="form-control" required="" id="FirstName" name="FirstName" placeholder="Enter the first name"/>
+                            <input class="form-control" required="" id="FirstName"
+                            pattern="^[a-zA-Z ]+$" title="*Valid characters: Alphabets and space." 
+                            name="FirstName" placeholder="Enter the first name"/>
                             <br>
                         </div>
 
                         <!-- Last name-->
                         <div class="form-group col-4">
                             <label for="lastname">Student's Last Name</label>
-                            <input class="form-control" required="" id="LastName" name="LastName" placeholder="Enter the last name"/>
+                            <input class="form-control" required="" id="LastName" 
+                            pattern="^[a-zA-Z ]+$" title="*Valid characters: Alphabets and space."
+                            name="LastName" placeholder="Enter the last name"/>
                             <br>
                         </div>
 
                         <!-- DOB-->
                         <div class="form-group col-4">
                             <label for="dob">Student's Date of Birth</label>
-                            <input class="form-control" type="date" required="" name="DOB">
+                            <input class="form-control" type="date" required="" id="DOB" name="DOB">
                             <br>
                         </div>
                     </div>
@@ -136,7 +153,8 @@
                         <!-- Gender-->
                         <div class="form-group col-4">
                             <label for="gender">Student's Gender</label>
-                            <select class="form-select" name="Gender" aria-label="Default select example">
+                            <select class="form-select" id="Gender" name="Gender" 
+                            aria-label="Default select example">
                                 <option disabled selected>Select gender</option>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
@@ -147,8 +165,8 @@
                         <!-- Hostel-->
                         <div class="form-group col-4">
                             <label for="hostel">Student's Hostel</label>
-                            <select class="form-select" name="Hostel" aria-label="Default select example">
-                            <option class="p-2" selected>Select Hostel</option>
+                            <select class="form-select" id="Hostel" name="Hostel" aria-label="Default select example">
+                            <option class="p-2" disabled selected>Select Hostel</option>
                             <?php getitems('hostels');?>
                             </select>
                             <br>
@@ -157,8 +175,8 @@
                         <!-- Class-->
                         <div class="form-group col-4">
                             <label for="class">Student's Class</label>
-                            <select class="form-select" name="Class" aria-label="Default select example">
-                                <option selected>Select Class</option>
+                            <select class="form-select" id="Class" name="Class" aria-label="Default select example">
+                                <option disabled selected>Select Class</option>
                                 <?php getitems('classes');?>
                             </select>
                             <br>
@@ -167,19 +185,32 @@
 
                     <div class="row">
                         <div class="row">
-                            <h5>Parent's Information</h5>
+                            <hr>
+                            <h5 class="py-3">Parent's Information</h5>
                         </div>
                         <div class="row">
                             <div class="row">
-                                <div class="form-group col-6">
-                                    <label for="guardian">Parent's Name</label>
-                                    <input class="form-control" required="" name="ParentsName" placeholder="Enter the parents's name"/>
+                                <div class="form-group col-4">
+                                    <label for="guardian">Parent's First Name</label>
+                                    <input class="form-control" required="" id="ParentsFirstName" name="ParentsFirstName"
+                                    pattern="^[a-zA-Z ]+$" title="*Valid characters: Alphabets and space." 
+                                    placeholder="Enter the first name"/>
                                     <br>
                                 </div>
 
-                                <div class="form-group col-6">
+                                <div class="form-group col-4">
+                                    <label for="guardian">Parent's Last Name</label>
+                                    <input class="form-control" required="" id="ParentsLastName" name="ParentsLastName"
+                                    pattern="^[a-zA-Z ]+$" title="*Valid characters: Alphabets and space." 
+                                    placeholder="Enter the last name"/>
+                                    <br>
+                                </div>
+
+                                <div class="form-group col-4">
                                     <label for="guardian">Parents's Phone</label>
-                                    <input class="form-control" required="" name="ParentsPhone" placeholder="Enter the parents's phone"/>
+                                    <input class="form-control" required="" id="ParentsPhone" 
+                                    name="ParentsPhone"
+                                     placeholder="Enter the phone number"/>
                                     <br>
                                 </div>
                             </div>
@@ -187,13 +218,17 @@
                             <div class="row">
                                 <div class="form-group col-6">
                                     <label for="guardian">Parent's Address</label>
-                                    <input class="form-control" required="" name="ParentsAddress" placeholder="Enter the parents's address"/>
+                                    <input class="form-control" required="" id="ParentsAddress" name="ParentsAddress" 
+                                    placeholder="Enter the address"/>
                                     <br>
                                 </div>
 
                                 <div class="form-group col-6">
                                     <label for="guardian">Parents's Email</label>
-                                    <input class="form-control" required="" name="ParentsEmail" placeholder="Enter the parents's email"/>
+                                    <input class="form-control" id="ParentsEmail" 
+                                    name="ParentsEmail"
+                                    title="Email should be like: example@you.com"
+                                     placeholder="Enter the email"/>
                                     <br>
                                 </div>
                             </div>
@@ -206,7 +241,7 @@
                     </div>
                 </form>
             </div>
-
+            </div>
         </div>
     </div>
 </div>
@@ -215,14 +250,32 @@
 <div class="modal fade" id="editStudent" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
+        <div class="overlay-loading">
+                    <div class="d-flex justify-content-center m-5">
+                        <div class="spinner-grow text-primary" style="width: 5rem; height: 5rem;" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                    <p class="text-center lead text-secondary"><strong>Updating Record ...</strong></p>
+                </div>
+                <div class="overlay-results">
+                    <div class="text-center">
+                        <i class="fa fa-check bg-success align-middle text-light p-3 mt-4 mb-2" style="font-size:50px;border-radius:60px;"></i>
+                        <p class="lead text-success mb-5"><strong>Record Updated Successfully...</strong></p>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Return to page</button>
+                    </div>
+                </div>
+                <div class="modalContent">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Student's Form</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="inc/editforms/editStudents.php">
+            <div class="message" class="alert" role="alert" style="display: none;">
+                            </div>
+                <form id="getEditStudent">
                     
-                <input type="hidden" name="eid" value="">
+                <input type="hidden" id="eid" name="eid" value="">
                     <!-- Registration Number-->
                     <div class="form-group">
                         <label for="regNo">Student's Registration number</label>
@@ -234,21 +287,25 @@
                         <!-- First name-->
                         <div class="form-group col-4">
                         <label for="editFirstName">Student's First Name</label>
-                            <input class="form-control" required="" value="" id="editFirstName" name="editFirstName" placeholder="Enter the first name"/>
+                            <input class="form-control" required="" value="" 
+                            pattern="^[a-zA-Z ]+$" title="*Valid characters: Alphabets and space."
+                            id="editFirstName" name="editFirstName" placeholder="Enter the first name"/>
                             <br>
                         </div>
 
                         <!-- Last name-->
                         <div class="form-group col-4">
                             <label for="lastname">Student's Last Name</label>
-                                <input class="form-control" required="" id="editLastName" name="editLastName" placeholder="Enter the last name"/>
+                                <input class="form-control" required="" id="editLastName" 
+                                pattern="^[a-zA-Z ]+$" title="*Valid characters: Alphabets and space."
+                                name="editLastName" placeholder="Enter the last name"/>
                             <br>
                         </div>
 
                         <!-- DOB-->
                         <div class="form-group col-4">
                             <label for="dob">Student's Date of Birth</label>
-                            <input class="form-control" type="date" required="" name="editDOB">
+                            <input class="form-control" id="editDOB" type="date" required="" name="editDOB">
                             <br>
                         </div>
                     </div>
@@ -268,7 +325,7 @@
                         <!-- Hostel-->
                         <div class="form-group col-4">
                             <label for="hostel">Student's Hostel</label>
-                            <select class="form-select" name="editHostel" aria-label="Default select example">
+                            <select class="form-select" id="editHostel" name="editHostel" aria-label="Default select example">
                             <optgroup label="Select hostel">
                             <?php getitems('hostels');?>
                             </optgroup>
@@ -279,7 +336,8 @@
                         <!-- Class-->
                         <div class="form-group col-4">
                             <label for="class">Student's Class</label>
-                            <select class="form-select" required="" name="editClass" aria-label="Default select example">
+                            <select class="form-select" required="" name="editClass" 
+                            aria-label="Default select example" id="editClass">
                             <optgroup label="Select class">
                                 <?php getitems('classes');?>
                             </optgroup>
@@ -294,6 +352,7 @@
                     </div>
                 </form>
             </div>
+            </div>
         </div>
     </div>
 </div>
@@ -302,18 +361,28 @@
 <div class="modal fade" id="deleteStudent" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Delete Record</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
+        <div class="overlay-loading">
+                    <div class="d-flex justify-content-center m-5">
+                        <div class="spinner-grow text-primary" style="width: 5rem; height: 5rem;" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                    <p class="text-center lead text-secondary"><strong>Cleaning Up ...</strong></p>
+                </div>
+                <div class="modalContent">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Delete Record</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
             <div class="modal-body">
-                <form method="POST" action="inc/deleteforms/deleteStudents.php">
-                    <input type="hidden" name="did" value="">
+                <form id="getDeleteStudent">
+                    <input type="hidden" id="did" name="did" value="">
                     <h5 class="text-danger"> Are you sure you want to delete this record?</h5>                    <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <input type="submit" name="deleteSubmit" class="btn btn-danger" value="Delete Record"/>
                     </div>
                 </form>
+            </div>
             </div>
         </div>
     </div>

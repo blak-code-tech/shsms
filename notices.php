@@ -142,7 +142,7 @@ if (isset($_SESSION["id"])) {?>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="inc/editforms/editNotice.php">
+                    <form method="POST" class="row g-3 needs-validation" novalidate action="inc/editforms/editNotice.php">
                         <input type="hidden" value="" name="eid">
                         
                         <div class="row">
