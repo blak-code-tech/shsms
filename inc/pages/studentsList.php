@@ -24,7 +24,7 @@
             $check = mysqli_query($conn, $query);
 
             if (!$check) {
-                die('Query failed'.mysqli_error());
+                die('Query failed'.mysqli_error($conn));
             }else {
 
                 if ($check-> num_rows > 0){?>

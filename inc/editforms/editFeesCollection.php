@@ -2,10 +2,9 @@
 require('../../config/config.php');
 require('../../config/db.php');
 
-    //Handle Edit form submission
-    if (isset($_POST['editSubmit'])) {
+
+    if (isset($_POST['eid'])) {
         
-        var_dump($_POST);
         $eid = $_POST['eid'];
         $paidAmount = $_POST['editPaidAmount'];
         $balance = $_POST['editBalance'];
@@ -15,17 +14,15 @@ require('../../config/db.php');
         if ($eid) {
             # code...
             $query = "UPDATE `feescollection` SET `PaidAmount`= '$paidAmount', `Balance` = '$balance',
-            `Arrears` = '$arrears', `Remarks` = '$remarks' WHERE ID = '$eid'";
+            `Arrears` = '$arrears', `Remarks` = '$remarks' WHERE ID = $eid";
 
             $check = mysqli_query($conn, $query);
 
             if (!$check) {
-                die('Query failed'.mysqli_error($conn));   
+                die('Query failed'.mysqli_error($conn));
+                echo 'Query failed'.mysqli_error($conn);
             }else{
-                $msg = "Record updated successfully..";
-                $msgClass = "alert-success";
-                echo "all good";
-                header("location: http://localhost/shsms/feescollection.php");
+                echo "OK.";
             }
         }
     }

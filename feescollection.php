@@ -50,17 +50,11 @@ if (isset($_SESSION["id"])) {?>
     <div class="container py-3 justify-content-center">
             
             <div class="table-responsive text-center">
-                
-                <?php if($msg != ''):?>
-                    <div class="alert <?php echo $msgClass; ?>">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    <?php echo $msg; ?></div>
-                <?php endif?>
-            
+
                 <div id="toolbar">
                 <?php if(isset($_SESSION['UserType']) && $_SESSION['UserType'] == 'admin'):?>
                     <!-- Button trigger modal -->
-                    <a data-bs-toggle="modal" data-bs-target="#addFees" type="button" class="btn btn-primary mx-2">
+                    <a data-bs-toggle="modal" data-bs-target="#addFeesCollection" type="button" class="btn btn-primary mx-2">
                     Add New Fees Collection
                     </a>
                     <?php endif; ?>
@@ -87,24 +81,32 @@ if (isset($_SESSION["id"])) {?>
             </div>
     </div>
 
-    <!-- Add student Modal -->
-    <div class="modal fade" id="addFees" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- Add fees Modal -->
+    <div class="modal fade" data-bs-backdrop="static" id="addFeesCollection" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
+            <div class="overlay-loading">
+                    <div class="d-flex justify-content-center m-5">
+                        <div class="spinner-grow text-primary" style="width: 5rem; height: 5rem;" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                    <p class="text-center lead text-secondary"><strong>Processing Form ...</strong></p>
+                </div> 
+                <div class="overlay-results">
+                    <div class="text-center">
+                        <i class="fa fa-check bg-success align-middle text-light p-3 mt-4 mb-2" style="font-size:50px;border-radius:60px;"></i>
+                        <p class="lead text-success mb-5"><strong>Record Added Successfully...</strong></p>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Return to page</button>
+                    </div>
+                </div>
+                    <div class="modalContent">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Fees Collection Form</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <?php if($msg != ''):?>
-                        <div class="alert <?php echo $msgClass; ?>">
-                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                        <?php echo $msg; ?></div>
-                    <?php endif?>
-
-                    <form method="POST" action="inc/addforms/addFeesCollection.php">
-                        <input type="hidden" name="eid" value="">
-
+                    <form id="getAddFees">
                         <div class="row">
 
                             <!--<div class="form-group col-6">
@@ -117,17 +119,20 @@ if (isset($_SESSION["id"])) {?>
                             </div>-->
                             <div class="form-group col-6">
                                 <label for="gender">Registration Number</label>
-                                <input list="regNo" class="form-control" name="RegNo" id="RegNo" placeholder="Enter the registration number">
-                                <datalist id="regNo">
+                                <input list="datalistOptions" required class="form-control" name="RegNo" 
+                                id="RegNo" placeholder="Enter the registration number">
+                                <datalist id="datalistOptions">
                                     <?php getstudentregs();?>
                                 </datalist>
                                 <br>
                             </div>
+                            
 
                             <!-- DOB-->
                             <div class="form-group col-6">
                                 <label for="PaidAmount">Paid Amount</label>
-                                <input class="form-control" type="number" placeholder="Enter the paid amount" required="" name="PaidAmount">
+                                <input class="form-control" type="text" placeholder="Enter the paid amount"
+                                 required="" id="PaidAmount" name="PaidAmount" pattern="^[0-9]+$">
                                 <br>
                             </div>
                         </div>
@@ -136,14 +141,16 @@ if (isset($_SESSION["id"])) {?>
 
                             <div class="form-group col-6">
                                 <label for="Arrears">Arrears</label>
-                                <input class="form-control" type="number" placeholder="Enter the arrears" required="" name="Arrears">
+                                <input class="form-control" type="text" placeholder="Enter the arrears"
+                                 required="" id="Arrears" name="Arrears" pattern="^[0-9]+$" maxlength="8">
                                 <br>
                             </div>
 
 
                             <div class="form-group col-6">
                                 <label for="Balance">Balance</label>
-                                <input class="form-control" type="number" placeholder="Enter the balance" required="" name="Balance">
+                                <input class="form-control" type="number" placeholder="Enter the balance"
+                                 required="" id="Balance" name="Balance" readonly pattern="^[0-9]+$">
                                 <br>
                             </div>
                         </div>
@@ -160,33 +167,54 @@ if (isset($_SESSION["id"])) {?>
                         </div>
                     </form>
             </div>
+            </div>
         </div>
     </div>
     </div>
-    <!-- Edit teacher info Modal -->
-    <div class="modal fade" id="editFeesCollection" tabindex="-1" aria-hidden="true">
+
+    <!-- Edit fees info Modal -->
+    <div class="modal fade" data-bs-backdrop="static" id="editFeesCollection" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
+            <div class="overlay-loading">
+                    <div class="d-flex justify-content-center m-5">
+                        <div class="spinner-grow text-primary" style="width: 3rem; height: 3rem;" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                    <p class="text-center lead text-secondary"><strong>Updating Records ...</strong></p>
+                </div>
+                <div class="overlay-results">
+                    <div class="text-center">
+                        <i class="fa fa-check bg-success align-middle text-light p-3 mt-4 mb-2" style="font-size:50px;border-radius:60px;"></i>
+                        <p class="lead text-success mb-5"><strong>Record Updated Successfully...</strong></p>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Return to page</button>
+                    </div>
+                </div>
+                <div class="modalContent">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Edit Fees Collection Form</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="inc/editforms/editFeesCollection.php">
-                        <input type="hidden" value="" name="eid">
+                    <form id="getEditFees">
+                        <input type="hidden" value="" id="eid" name="eid">
                         
                         <div class="row">
 
                             <div class="form-group col-6">
                                 <label>Registration Number</label>
-                                <input class="form-control" type="text" readonly="" placeholder="Enter the paid amount" required="" name="editRegNo">
+                                <input class="form-control" type="text" readonly="" 
+                                placeholder="Enter the paid amount" required="" id="editRegNo"
+                                 name="editRegNo">
                                 <br>
                             </div>
 
                             <!-- DOB-->
                             <div class="form-group col-6">
                                 <label for="">Paid Amount</label>
-                                <input class="form-control" type="number" placeholder="Enter the paid amount" required="" name="editPaidAmount">
+                                <input class="form-control" maxlength="6" type="text" placeholder="Enter the paid amount"
+                                 required="" id="editPaidAmount" id="editPaidAmount" pattern="^[0-9]+$" name="editPaidAmount">
                                 <br>
                             </div>
                         </div>
@@ -195,21 +223,24 @@ if (isset($_SESSION["id"])) {?>
 
                             <div class="form-group col-6">
                                 <label for="Arrears">Arrears</label>
-                                <input class="form-control" type="number" placeholder="Enter the arrears" required="" name="editArrears">
+                                <input class="form-control" maxlength="6" type="text" placeholder="Enter the arrears"
+                                 required="" id="editArrears" name="editArrears" pattern="^[0-9]+$">
                                 <br>
                             </div>
 
 
                             <div class="form-group col-6">
                                 <label for="Balance">Balance</label>
-                                <input class="form-control" type="number" placeholder="Enter the balance" required="" name="editBalance">
+                                <input class="form-control" type="number" readonly placeholder="Enter the balance"
+                                 required="" id="editBalance" name="editBalance" pattern="^[0-9]+$">
                                 <br>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="Phone">Remarks</label>
-                            <input class="form-control" required="" id="Remarks" name="editRemarks" placeholder="Enter your remarks"/>
+                            <input class="form-control" required="" id="editRemarks"
+                             name="editRemarks" placeholder="Enter your remarks"/>
                             <br>
                         </div>
                         <div class="modal-footer">
@@ -217,6 +248,7 @@ if (isset($_SESSION["id"])) {?>
                             <input type="submit" name="editSubmit" class="btn btn-primary" value="Update Record"/>
                         </div>
                     </form>
+                </div>
                 </div>
             </div>
         </div>
@@ -226,19 +258,36 @@ if (isset($_SESSION["id"])) {?>
     <div class="modal fade" id="deleteFeesCollection" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
+            <div class="overlay-loading">
+                <div class="d-flex justify-content-center m-5">
+                    <div class="spinner-grow text-primary" style="width: 5rem; height: 5rem;" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+                <p class="text-center lead text-secondary"><strong>Cleaning Up ...</strong></p>
+            </div>
+            <div class="overlay-results">
+                <div class="text-center">
+                    <i class="fa fa-check bg-success align-middle text-light p-3 mt-4 mb-2" style="font-size:50px;border-radius:60px;"></i>
+                    <p class="lead text-success mb-5"><strong>Record Deleted Successfully...</strong></p>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Return to page</button>
+                </div>
+            </div>
+            <div class="modalContent">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Delete Record</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="inc/deleteforms/deleteFeesCollection.php">
-                        <input type="hidden" name="did" value="">
+                    <form id="getDeleteFees">
+                        <input type="hidden" id="did" name="did" value="">
                         <h5 class="text-danger"> Are you sure you want to delete this record?</h5>                        <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             <input type="submit" name="deleteSubmit" class="btn btn-danger" value="Delete Record"/>
                         </div>
                     </form>
                 </div>
+            </div>
             </div>
         </div>
     </div>

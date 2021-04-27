@@ -36,7 +36,11 @@ function getitems($table){
    $query="SELECT * FROM $table";
    $result = mysqli_query($conn, $query);
    if($result){
-       $resultArray = mysqli_fetch_assoc($result);
+       if($table === "positions"){
+        while ($row = mysqli_fetch_assoc($result)){
+            echo '<option class="p-2" value="'.$row["ID"].'">'.$row["Position"].'</option>';
+        }
+       }
        while ($row = mysqli_fetch_assoc($result)){
            echo '<option class="p-2" value="'.$row["ID"].'">'.$row["Name"].'</option>';
        }
@@ -51,12 +55,11 @@ function getitems($table){
 function getstudentregs(){
    require('config/db.php');
 
-   $query="SELECT RegNo FROM students";
+   $query="SELECT StudentID FROM students";
    $result = mysqli_query($conn, $query);
    if($result){
-       $resultArray = mysqli_fetch_assoc($result);
-       while ($row = mysqli_fetch_assoc($result)){
-           echo '<option class="p-2" value"'.$row["RegNo"].'">'.$row["RegNo"].'</option>';
+       while ($row = mysqli_fetch_array($result)){
+           echo '<option class="p-2" value"'.$row["StudentID"].'">'.$row["StudentID"].'</option>';
        }
    }
    else{

@@ -4,8 +4,9 @@
 <script src="assets/js/bootstrap-table-materialize.js"></script>
 <script src="assets/js/bootstrap-table.js"></script>
 <script src="assets/js/tableExport.js"></script>
-<script src="assets/js/aos.js"></script>
 <script src="assets/js/main.js"></script>
+<script src="assets/js/formValidation.js"></script>
+<script src="assets/js/aos.js"></script>
 <script src="assets/js/owl.carousel.js"></script>
 
 
