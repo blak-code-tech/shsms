@@ -6,10 +6,11 @@
         <th data-field="StudentID" data-sortable="true">Student ID</th>
         <th data-field="Name" data-sortable="true">Name</th>
         <th data-field="DOB" data-sortable="true">Date Of Birth</th>
-        <th data-field="Gender" data-sortable="false">Gender</th>
-        <th data-field="hostelID" data-sortable="false">Hostel ID</th>
-        <th data-field="classID" data-sortable="true">Class ID</th>
-        <th data-field="parentID" data-sortable="false">Parent ID</th>
+        <th data-field="Email" data-sortable="true">Email</th>
+        <th data-field="Gender">Gender</th>
+        <th data-field="hostelID">Hostel ID</th>
+        <th data-field="classID">Class ID</th>
+        <th data-field="parentID">Parent ID</th>
         
         <th>Actions</th>
     </tr>
@@ -34,6 +35,7 @@
                         <td class="p-2"><?php echo $row["StudentID"];?></td>
                         <td class="p-2"><?php echo $row["FirstName"].' '. $row["LastName"];?></td>
                         <td class="p-2"><?php echo $row["DOB"];?></td>
+                        <td class="p-2"><?php echo $row["Email"];?></td>
                         <td class="p-2"><?php echo $row["Gender"];?></td>
                         <td class="p-2"><?php echo $row["HostelID"];?></td>
                         <td class="p-2"><?php echo $row["ClassID"];?></td>

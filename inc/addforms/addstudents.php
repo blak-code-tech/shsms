@@ -1,6 +1,7 @@
 <?php
 require('../../config/config.php');
 require('../../config/db.php');
+require('../../config/fetch_data.php');
 
 if(isset($_POST['StudentID'])){
 
@@ -13,6 +14,7 @@ if(isset($_POST['StudentID'])){
     $lname = $_POST['LastName'];
     $lname = trim($lname);
     $lname = ucwords($lname);
+    $email = generateEmail($fname,$lname,$conn,'student');
     $dob = $_POST['DOB'];
     $gender = $_POST['Gender'];
     $classID = $_POST["Class"];
@@ -29,7 +31,7 @@ if(isset($_POST['StudentID'])){
     $parentPhone = $_POST['ParentsPhone'];
     $parentAddress = $_POST['ParentsAddress'];
     $parentEmail = $_POST['ParentsEmail'];
-
+ 
     $query = "INSERT INTO `parents`(`FirstName`,`LastName`, `Phone`, `HomeAddress`, `Email`) 
     VALUES ('$parentFirstName','$parentLastName','$parentPhone','$parentAddress','$parentEmail')";
     $checkParentQuery = mysqli_query($conn, $query);
@@ -53,7 +55,7 @@ if(isset($_POST['StudentID'])){
                 die('Query failed'.mysqli_error($conn));
                 echo 'Query failed'.mysqli_error($conn);
             }else{
-                echo "OK."; 
+                echo '{'.$email.'}'.'OK.';
             }
         }
         

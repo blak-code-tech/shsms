@@ -11,8 +11,8 @@ if(isset($_POST['BankName']) && isset($_POST['accNo'])){
     $check = mysqli_query($conn, $query);
 
     if (!$check) {
-        die('Query failed'.mysqli_error($conn));
-        echo 'Query failed'.mysqli_error($conn);
+        die('Query failed: '.mysqli_error($conn));
+        echo 'Query failed: '.mysqli_error($conn);
     }else{
         echo "OK.";
     }

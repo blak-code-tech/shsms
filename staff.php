@@ -58,7 +58,9 @@ if (isset($_SESSION["id"])) {?>
                     </a>
                     <?php endif; ?>
                 </div>
-                <table  data-toggle="table"
+                <table  id="table"
+                        data-toggle="table"
+                        data-buttons="buttons"
                         data-search="true"
                         data-filter-control="true" 
                         data-click-to-select="true"
@@ -66,7 +68,6 @@ if (isset($_SESSION["id"])) {?>
                         data-search-align="left"
                         data-show-toggle="true"
                         data-show-fullscreen="true"
-                        data-show-pagination-switch="true"
                         data-pagination-pre-text="Prev"
                         data-pagination-next-text="Next"
                         data-pagination-h-align="left"
@@ -79,7 +80,7 @@ if (isset($_SESSION["id"])) {?>
                 </table>
             </div>
     </div>
-
+</div>
     <!-- Add student Modal -->
     <div class="modal fade" id="addStaff" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -95,7 +96,8 @@ if (isset($_SESSION["id"])) {?>
                 <div class="overlay-results">
                     <div class="text-center">
                         <i class="fa fa-check bg-success align-middle text-light p-3 mt-4 mb-2" style="font-size:50px;border-radius:60px;"></i>
-                        <p class="lead text-success mb-5"><strong>Record Updated Successfully...</strong></p>
+                        <p class="lead text-success mb-5"><strong>Staff Added Successfully...</strong></p>
+                        <p class="lead text-dark mb-5"><strong>Kindly forward the generated report to the staff.</strong></p>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Return to page</button>
                     </div>
                 </div>
@@ -134,7 +136,7 @@ if (isset($_SESSION["id"])) {?>
                             <!-- Gender-->
                             <div class="form-group col-4">
                                 <label for="gender">Staff's Gender</label>
-                                <select class="form-select" id="Gender" name="Gender" aria-label="Default select example">
+                                <select class="form-select" required id="Gender" name="Gender" aria-label="Default select example">
                                     <option disabled selected>Select gender</option>
                                     <option value="Male">Male</option>
                                     <option value="Female">Female</option>
@@ -165,11 +167,12 @@ if (isset($_SESSION["id"])) {?>
                                 </select>
                                 <br>
                             </div>
+                            <!--
                             <div class="form-group col-8">
                                 <label for="Phone">Staff's Email</label>
                                 <input class="form-control" required="" id="Email" name="Email" placeholder="Enter the email"/>
                                 <br>
-                            </div>
+                            </div>-->
                         </div>
 
                         <div class="modal-footer">
@@ -182,7 +185,7 @@ if (isset($_SESSION["id"])) {?>
         </div>
     </div>
     </div>
-    <!-- Edit teacher info Modal -->
+    <!-- Edit staff info Modal -->
     <div class="modal fade" id="editStaff" data-bs-backdrop="static" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
@@ -264,11 +267,6 @@ if (isset($_SESSION["id"])) {?>
                                         <?php getitems('positions');?>
                                     </optgroup>
                                 </select>
-                                <br>
-                            </div>
-                            <div class="form-group col-8">
-                                <label for="Phone">Staff's Email</label>
-                                <input class="form-control" required="" id="editEmail" name="editEmail" placeholder="Enter the email"/>
                                 <br>
                             </div>
                         </div>

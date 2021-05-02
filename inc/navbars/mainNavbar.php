@@ -22,6 +22,15 @@
                     <li><a class="dropdown-item" href="<?php echo ROOT_URL;?>home.php">Fees Structure</a></li>
                 </ul>
             </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Exams
+                </a>
+                <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarDarkDropdownMenuLink">
+                    <li><a class="dropdown-item" href="<?php echo ROOT_URL;?>examresults.php">Results</a></li>
+                   <!-- <li><a class="dropdown-item" href="<?php echo ROOT_URL;?>examcategories.php">Categories</a></li>-->
+                </ul>
+            </li>
             <li class="nav-item"><a class="nav-link hvr-underline-from-center" href="<?php echo ROOT_URL;?>hostels.php">Hostels</a></li>
             <li class="nav-item"><a class="nav-link hvr-underline-from-center" href="<?php echo ROOT_URL;?>parents.php">Parents</a></li>
             <li class="nav-item dropdown">
@@ -36,7 +45,7 @@
         </ul>
         
         <ul class="navbar-nav mr-auto">
-        <li class="nav-item dropdown">
+            <li class="nav-item dropdown">
                 
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <img style="width: 40px;

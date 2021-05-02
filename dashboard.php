@@ -21,14 +21,14 @@ if (isset($_SESSION["id"])) {?>
 
 <section id="dashboad-items" class="container-fluid col-xxl-8 px-5 py-3">
         <div class="card-group">
-            <div class="card mb-4 mx-2 rounded-3 shadow-sm" data-aos="fade-up"
-     data-aos-duration="500">
+            <div class="card mb-4 mx-2 rounded-3 shadow" data-aos="fade-up"
+                    data-aos-duration="500">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <i class="fa fa-user fa-3x text-warning"></i>
                         <div class="card-info">
                             <p class="lead">Students</p>
-                            <h5 class="text-right"><?php countrecords("students"); ?></5>
+                            <h5 class="d-flex flex-row-reverse"><?php countrecords("students"); ?></5>
                         </div>
                     </div>
                     <hr>
@@ -36,14 +36,14 @@ if (isset($_SESSION["id"])) {?>
                 </div>
             </div>
                   
-            <div class="card mb-4 mx-2 rounded-3 shadow-sm" data-aos="fade-up"
-     data-aos-duration="500" data-aos-delay="250">
+            <div class="card mb-4 mx-2 rounded-3 shadow" data-aos="fade-up"
+                 data-aos-duration="500" data-aos-delay="250">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <i class="fa fa-book fa-3x text-secondary"></i>
                         <div class="card-info">
                             <p class="lead">Subjects</p>
-                            <h5 class="text-right"><?php countrecords("subjects"); ?></5>
+                            <h5 class="d-flex flex-row-reverse"><?php countrecords("subjects"); ?></5>
                         </div>
                     </div>
                     <hr>
@@ -51,15 +51,15 @@ if (isset($_SESSION["id"])) {?>
                 </div>
             </div>
 
-            <div class="card mb-4 mx-2 rounded-3 shadow-sm"
+            <div class="card mb-4 mx-2 rounded-3 shadow"
             data-aos="fade-up"
-     data-aos-duration="500" data-aos-delay="350">
+                data-aos-duration="500" data-aos-delay="350">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <i class="fa fa-credit-card fa-3x text-success"></i>
                         <div class="card-info">
                             <p class="lead">Banks</p>
-                            <h5 class="text-right"><?php countrecords("banks"); ?></5>
+                            <h5 class="d-flex flex-row-reverse"><?php countrecords("banks"); ?></5>
                         </div>
                     </div>
                     <hr>
@@ -68,14 +68,14 @@ if (isset($_SESSION["id"])) {?>
                 </div>
             </div>
 
-            <div class="card mb-4 mx-2 rounded-3 shadow-sm" data-aos="fade-up"
-     data-aos-duration="500" data-aos-delay="450">
+            <div class="card mb-4 mx-2 rounded-3 shadow" data-aos="fade-up"
+                data-aos-duration="500" data-aos-delay="450">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <i class="fa fa-graduation-cap fa-3x text-info"></i>
                         <div class="card-info">
                             <p class="lead">Staff</p>
-                            <h5 class="text-right"><?php countrecords("staff"); ?></5>
+                            <h5 class="d-flex flex-row-reverse"><?php countrecords("staff"); ?></5>
                         </div>
                     </div>
                     <hr>
@@ -87,14 +87,14 @@ if (isset($_SESSION["id"])) {?>
         </div>
         
         <div class="card-group">
-            <div class="card mb-4 mx-2 rounded-3 shadow-sm" data-aos="fade-up"
+            <div class="card mb-4 mx-2 rounded-3 shadow" data-aos="fade-up"
                 data-aos-duration="500" data-aos-delay="550">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <i class="fa fa-money fa-3x text-warning"></i>
                         <div class="card-info">
                             <p class="lead">Fees Collection</p>
-                            <h5 class="text-right"><?php countrecords("notices"); ?></5>
+                            <h5 class="d-flex flex-row-reverse"><?php countrecords("feescollection"); ?></5>
                         </div>
                     </div>
                     <hr>
@@ -103,14 +103,14 @@ if (isset($_SESSION["id"])) {?>
                 </div>
             </div>
                   
-            <div class="card mb-4 mx-2 rounded-3 shadow-sm" data-aos="fade-up"
-     data-aos-duration="500" data-aos-delay="650">
+            <div class="card mb-4 mx-2 rounded-3 shadow" data-aos="fade-up"
+                data-aos-duration="500" data-aos-delay="650">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <i class="fa fa-flask fa-3x text-secondary"></i>
                         <div class="card-info">
                             <p class="lead">Classes</p>
-                            <h5 class="text-right"><?php countrecords("classes"); ?></5>
+                            <h5 class="d-flex flex-row-reverse"><?php countrecords("classes"); ?></5>
                         </div>
                     </div>
                     <hr>
@@ -119,14 +119,14 @@ if (isset($_SESSION["id"])) {?>
                 </div>
             </div>
 
-            <div class="card mb-4 mx-2 rounded-3 shadow-sm" data-aos="fade-up"
-     data-aos-duration="500" data-aos-delay="750">
+            <div class="card mb-4 mx-2 rounded-3 shadow" data-aos="fade-up"
+                data-aos-duration="500" data-aos-delay="750">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <i class="fa fa-home fa-3x text-success"></i>
                         <div class="card-info">
                             <p class="lead">Hostels</p>
-                            <h5 class="text-right"><?php countrecords("hostels"); ?></5>
+                            <h5 class="d-flex flex-row-reverse"><?php countrecords("hostels"); ?></5>
                         </div>
                     </div>
                     <hr>
@@ -135,14 +135,14 @@ if (isset($_SESSION["id"])) {?>
                 </div>
             </div>
 
-            <div class="card mb-4 mx-2 rounded-3 shadow-sm" data-aos="fade-up"
-     data-aos-duration="500" data-aos-delay="850">
+            <div class="card mb-4 mx-2 rounded-3 shadow" data-aos="fade-up"
+                data-aos-duration="500" data-aos-delay="850">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <i class="fa fa-flag fa-3x text-info"></i>
                         <div class="card-info">
                             <p class="lead">Events</p>
-                            <h5 class="text-right"><?php countrecords("events"); ?></5>
+                            <h5 class="d-flex flex-row-reverse"><?php countrecords("events"); ?></5>
                         </div>
                     </div>
                     <hr>
@@ -154,14 +154,14 @@ if (isset($_SESSION["id"])) {?>
         </div>
         
         <div class="card-group">
-            <div class="card mb-4 mx-2 rounded-3 shadow-sm" data-aos="fade-up"
-     data-aos-duration="500" data-aos-delay="250">
+            <div class="card mb-4 mx-2 rounded-3 shadow" data-aos="fade-up"
+                data-aos-duration="500" data-aos-delay="250">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
-                        <i class="fa fa-th-list fa-3x text-warning"></i>
+                        <i class="fa fa-clipboard fa-3x text-warning"></i>
                         <div class="card-info">
                             <p class="lead">Notices</p>
-                            <h5 class="text-right"><?php countrecords("notices"); ?></5>
+                            <h5 class="d-flex flex-row-reverse"><?php countrecords("notices"); ?></5>
                         </div>
                     </div>
                     <hr>
@@ -170,14 +170,14 @@ if (isset($_SESSION["id"])) {?>
                 </div>
             </div>
                   
-            <div class="card mb-4 mx-2 rounded-3 shadow-sm" data-aos="fade-up"
-     data-aos-duration="500" data-aos-delay="350">
+            <div class="card mb-4 mx-2 rounded-3 shadow" data-aos="fade-up"
+                data-aos-duration="500" data-aos-delay="350">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <i class="fa fa-users fa-3x text-secondary"></i>
                         <div class="card-info">
                             <p class="lead">Parents</p>
-                            <h5 class="text-right"><?php countrecords("parents"); ?></5>
+                            <h5 class="d-flex flex-row-reverse"><?php countrecords("parents"); ?></5>
                         </div>
                     </div>
                     <hr>
@@ -186,14 +186,14 @@ if (isset($_SESSION["id"])) {?>
                 </div>
             </div>
 
-            <div class="card mb-4 mx-2 rounded-3 shadow-sm" data-aos="fade-up"
-     data-aos-duration="500" data-aos-delay="450">
+            <div class="card mb-4 mx-2 rounded-3 shadow" data-aos="fade-up"
+                data-aos-duration="500" data-aos-delay="450">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <i class="fa fa-sort-amount-asc fa-3x text-success"></i>
                         <div class="card-info">
                             <p class="lead">Fees Structure</p>
-                            <h5 class="text-right">7</5>
+                            <h5 class="d-flex flex-row-reverse">7</5>
                         </div>
                     </div>
                     <hr>
@@ -202,30 +202,31 @@ if (isset($_SESSION["id"])) {?>
                 </div>
             </div>
 
-            <div class="card mb-4 mx-2 rounded-3 shadow-sm" data-aos="fade-up"
-     data-aos-duration="500" data-aos-delay="550">
+            <div class="card mb-4 mx-2 rounded-3 shadow" data-aos="fade-up"
+                    data-aos-duration="500" data-aos-delay="550">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <i class="fa fa-pencil fa-3x text-info"></i>
                         <div class="card-info">
-                            <p class="lead">Exams</p>
-                            <h5 class="text-right"><?php countrecords("exams"); ?></5>
+                            <p class="lead">Exams Results</p>
+                            <h5 class="d-flex flex-row-reverse"><?php countrecords("exams"); ?></5>
                         </div>
                     </div>
                     <hr>
-                    <a class="btn btn-block hvr-bounce-to-right">View <i class="fa fa-angle-double-right"></i></a>
+                    <a class="btn btn-block hvr-bounce-to-right" href="<?php echo ROOT_URL;?>examresults.php">View <i class="fa fa-angle-double-right"></i></a>
 
                 </div>
             </div>
 
         </div>
+        
 
 </section>
 
 
 <section class="container-fluid px-5 py-3">
     <div class="card-group">
-        <div class="card mb-4 mt-3 mx-2 rounded-3 shadow-sm">
+        <div class="card mb-4 mt-3 mx-2 rounded-3 shadow">
             
             <div class="card-body">
             <div class="card-title pb-2">
@@ -260,7 +261,7 @@ if (isset($_SESSION["id"])) {?>
                                     $check = mysqli_query($conn, $query);
 
                                     if (!$check) {
-                                        die('Query failed'.mysqli_error());
+                                        die('Query failed'.mysqli_error($conn));
                                     }else {
 
                                         if ($check-> num_rows > 0){
