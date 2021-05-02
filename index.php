@@ -65,7 +65,7 @@
                                     }
                     
                                     if (isset($_SESSION['id'])) {
-                                        header("Location: dashboard.php");
+                                        header("Location: home.php");
                                         ob_end_flush();
                                         mysqli_close($conn);
                                     }	
