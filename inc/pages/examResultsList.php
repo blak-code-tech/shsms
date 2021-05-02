@@ -4,11 +4,14 @@
         
         <thead>
             <tr>
+                <?php if($user === 'admin' || $user === 'teacher'):?>
                 <th data-field="id" data-sortable="true">ID</th>
+                <?php endif; ?>
                 <th data-field="studentid" data-sortable="true">StudentID</th>
-                <th data-field="Exam" data-sortable="true">Category</th>
+                <th data-field="Exam">Category</th>
                 <th data-field="Score" data-sortable="true">Score</th>
                 <th data-field="Grade" data-sortable="true">Grade</th>
+                <th data-field="GradedBy">Graded By</th>
                 <?php if($user === 'admin' || $user === 'teacher'):?>
                 <th>Actions</th>
                 <?php endif; ?>
@@ -18,8 +21,14 @@
                 <?php
         
                     $num = 0;
-        
-                    $query = "SELECT * FROM exams";
+                    if($user === 'admin' || $user === 'teacher'){
+
+                        $query = "SELECT * FROM exams";
+                    }
+                    else if($user === 'student'){
+                        $id = $_SESSION['id'];
+                        $query = "SELECT * FROM exams where `StudentID` = '$id'";
+                    }
         
                     $check = mysqli_query($conn, $query);
         
@@ -31,11 +40,14 @@
         
                             <?php while ($row = mysqli_fetch_assoc($check)):?>
                             <tr class="p-1">
+                                <?php if($user === 'admin' || $user === 'teacher'):?>
                                 <td><?php echo $row["ID"];?></td>
+                                <?php endif; ?>
                                 <td><?php echo $row["StudentID"];?></td> 
                                 <td><?php echo getItem('examcategory',$row["ExamCategory"]);?></td> 
                                 <td><?php echo $row["Score"];?></td>
                                 <td><?php echo $row["Grade"];?></td> 
+                                <td><?php echo $row["GradedBy"];?></td> 
                                 <?php if($user === 'admin' || $user === 'teacher'):?>
                                 <td class="p-2">
                                     <div class="col">

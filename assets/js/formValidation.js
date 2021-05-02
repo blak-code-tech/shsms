@@ -1704,10 +1704,6 @@ $('#getAddResults').on('submit',function(e){
                     mainForm.before(successAlert);
                 }
                 setTimeout(function(){ 
-                    $('#RegNo').val('');
-                    $('#Category').val('');
-                    $('#Grade').val('');
-                    $('#Score').val('');
                     overlay.hide();
                     displayResults.show();
                     }, 2000);
@@ -1745,7 +1741,6 @@ $('#getAddResults').on('submit',function(e){
 $('#getEditResults').on('submit',function(e){
     e.preventDefault();
 
-    var displayResults = $('.overlay-results');
     var overlay = $('.overlay-loading');
     var mainForm = $('#getEditResults');
     var form = $('.modalContent');
@@ -1773,14 +1768,7 @@ $('#getEditResults').on('submit',function(e){
                     var successAlert = '<div id="successCheck" class="alert alert-success alert-dismissible" role="alert">Staff Updated Successfully..<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
                     mainForm.before(successAlert);
                 }
-                setTimeout(function(){ 
-                    $('#editFirstName').val('');
-                    $('#editLastName').val('');
-                    $('#editDOB').val('');
-                    $('#editEmail').val('');
-                    $('#editPosition').val('');
-                    $('#editGender').val('');
-                    $('#editEmail').val('');
+                setTimeout(function(){
                     overlay.hide();
                     displayResults.show();
                     }, 2000);
