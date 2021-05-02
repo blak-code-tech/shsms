@@ -108,15 +108,6 @@ if (isset($_SESSION["id"])) {?>
                 <div class="modal-body">
                     <form id="getAddFees">
                         <div class="row">
-
-                            <!--<div class="form-group col-6">
-                                <label for="gender">Registration Number</label>
-                                <select class="form-select" name="RegNo" aria-label="Default select example">
-                                    <option disabled selected>Select student</option>
-                                    <?php getstudentregs();?>
-                                </select>
-                                <br>
-                            </div>-->
                             <div class="form-group col-6">
                                 <label for="gender">Registration Number</label>
                                 <input list="datalistOptions" required class="form-control" name="RegNo" 

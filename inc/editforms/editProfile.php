@@ -10,14 +10,14 @@ require('../../config/db.php');
         $lname = $_POST['editLastName'];
         $gender = $_POST['editGender'];
         $dob = $_POST['editDOB'];
-        $position = $_POST['editPosition'];
+        $email = $_POST['editEmail'];
         $phone = $_POST['editPhone'];
 
         if ($eid) {
             # code...
             $query = "UPDATE `staff` SET `FirstName`= '$fname', `LastName` = '$lname',
-            `Gender` = '$gender', `DOB` = '$dob',
-             `Phone` = '$phone', `Position` = $position  WHERE StaffID = '$eid'";
+            `Gender` = '$gender', `DOB` = '$dob', `Email` = '$email',
+             `Phone` = '$phone' WHERE StaffID = '$eid'";
 
             $check = mysqli_query($conn, $query);
 

@@ -5,6 +5,7 @@
 
 <?php
     require('config/db.php');
+    include('config/fetch_data.php');
     
     $msg = '';
     $msgClass = '';
@@ -23,28 +24,70 @@
                 # code...
                 if ($result-> num_rows == 0) {
                     # code...
-                    $query = "SELECT * FROM `teachers` WHERE `email`='$email'";
+                    $query = "SELECT * FROM `staff` WHERE `email`='$email'";
                     $result = mysqli_query($conn, $query);
 
                     if ($result) {
                         # code...
                         if ($result-> num_rows == 0) {
-                            $msg = 'Please enter a valid email.';
-                            $msgClass = 'alert-danger';
+                            $query = "SELECT * FROM `students` WHERE `email`='$email'";
+                            $result = mysqli_query($conn, $query);
+
+                            if ($result) {
+                                # code...
+                                if ($result-> num_rows == 0) {
+                                    $msg = 'Please enter a valid email.';
+                                    $msgClass = 'alert-danger';
+                                }else if ($result-> num_rows == 1) {
+                                    # code...
+                                    $user = mysqli_fetch_array($result);
+                
+                                    if (is_array($user)) {
+                                        # code...
+                                        $getPass = encrypt_decrypt($user['Passwords'],'decrypt');
+                                        if ($pass === $getPass) {
+                                            # code...
+                                            $_SESSION['UserType'] = 'student';
+                                            $_SESSION['id'] = $user['StudentID'];
+                                            $_SESSION['fname'] = $user['FirstName'];	
+                                            $_SESSION['lname'] = $user['LastName'];
+                                            $_SESSION['email'] = $user['Email'];	
+                                            $_SESSION['phone'] = $user['Phone'];
+                                            $_SESSION['pass'] = $user['Passwords'];
+                                        }
+                                        else{
+                                            $msg = 'Incorrect password.';
+                                            $msgClass = 'alert-danger';
+                                        }
+                                            
+                                    }else{
+                                        echo "OK not working";
+                                    }
+                    
+                                    if (isset($_SESSION['id'])) {
+                                        header("Location: dashboard.php");
+                                        ob_end_flush();
+                                        mysqli_close($conn);
+                                    }	
+                                        
+                                }
+                            }
                         }else if ($result-> num_rows == 1) {
                             # code...
                             $user = mysqli_fetch_array($result);
         
                             if (is_array($user)) {
                                 # code...
-                                if ($pass === $user['Passwords']) {
+                                $getPass = encrypt_decrypt($user['Passwords'],'decrypt');
+                                if ($pass === $getPass) {
                                     # code...
-                                    $_SESSION['UserType'] = 'teacher';
+                                    $_SESSION['UserType'] = 'staff';
                                     $_SESSION['id'] = $user['StaffID'];
                                     $_SESSION['fname'] = $user['FirstName'];	
                                     $_SESSION['lname'] = $user['LastName'];
                                     $_SESSION['email'] = $user['Email'];	
                                     $_SESSION['phone'] = $user['Phone'];
+                                    $_SESSION['pass'] = $user['Passwords'];
                                 }
                                 else{
                                     $msg = 'Incorrect password.';
@@ -70,7 +113,8 @@
 
                     if (is_array($user)) {
                         # code...
-                        if ($pass === $user['Passwords']) {
+                        $getPass = encrypt_decrypt($user['Passwords'],'decrypt');
+                        if ($pass === $getPass) {
                             # code...
                             $_SESSION['UserType'] = 'admin';
                             $_SESSION['id'] = $user['ID'];
@@ -79,6 +123,8 @@
                             $_SESSION['uname'] = $user['UserName'];	
                             $_SESSION['email'] = $user['Email'];	
                             $_SESSION['phone'] = $user['Phone'];
+                            $_SESSION['pass'] = $user['Passwords'];
+
                         }
                         else{
                             $msg = 'Incorrect password.';
@@ -121,7 +167,7 @@
 						Edukate Login
 					</span>
 
-					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: example@edukate.com">
+					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: example@edukate.edu">
 						<input class="input100" type="text" name="email" placeholder="Email">
 						<span class="focus-input100-1"></span>
 						<span class="focus-input100-2"></span>

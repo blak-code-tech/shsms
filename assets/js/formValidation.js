@@ -1,5 +1,13 @@
 (function ($) {
     "use strict";
+    var doc = new jsPDF();
+    var specialElementHandlers = {
+        '#editor': function (element, renderer) {
+            return true;
+        }
+    };
+
+    var displayResults = $('.overlay-results');
 
 /********************** Bank***************** */
 //Add a bank
@@ -808,6 +816,7 @@ $('#getAddStudent').on('submit',function(e){
 
     var msg = $('.message');
     var overlay = $('.overlay-loading');
+    var displayResults = $('.overlay-results');
     var form = $('.modalContent');
     var mainForm = $('#getAddStudent');
     msg.html('');
@@ -848,27 +857,25 @@ $('#getAddStudent').on('submit',function(e){
     
         xmlhttp.onload = function() {
             var results = xmlhttp.responseText;
-    
+            var email = results.substring(results.indexOf("{")+1, results.indexOf("}"));
             if(results.includes('OK')){
                 // Check if an element currently exists
                 if (!$('#successCheck').length) {
                     var successAlert = '<div id="successCheck" class="alert alert-success alert-dismissible" role="alert">Student Added Successfully..<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
                     mainForm.before(successAlert);
                 }
+
+                var msg = "Name: "+$('#FirstName').val()+" "+$('#LastName').val()+"\nID: "+$('#StudentID').val() +"\n"+ "Email: " + email + "\n" + "Password: Pass";
+                doc.text(msg, 15, 15, {
+                    'width': 170,
+                        'elementHandlers': specialElementHandlers
+                });
+                doc.save($('#StudentID').val()+'.pdf');
+
                 setTimeout(function(){ 
-                    $('#FirstName').val('');
-                    $('#LastName').val('');
-                    $('#DOB').val('');
-                    $('#Class').val('');
-                    $('#Gender').val('');
-                    $('#Hostel').val('');
-                    $('#ParentsFirstName').val('');
-                    $('#ParentsLastName').val('');
-                    $('#ParentsEmail').val('');
-                    $('#ParentsPhone').val('');
-                    $('#ParentsAddress').val('');
+                    
                     overlay.hide();
-                    form.show();
+                    displayResults.show();
                     }, 2000);
             }
             else{
@@ -1098,6 +1105,7 @@ $('#getAddStaff').on('submit',function(e){
 
     var msg = $('.message');
     var overlay = $('.overlay-loading');
+    var displayResults = $('.overlay-results');
     var form = $('.modalContent');
     var mainForm = $('#getAddStaff');
     msg.html('');
@@ -1106,7 +1114,6 @@ $('#getAddStaff').on('submit',function(e){
     "&FirstName="+$('#FirstName').val()+
     "&LastName="+$('#LastName').val()+
     "&DOB="+$('#DOB').val()+
-    "&Email="+$('#Email').val()+
     "&Gender="+$('#Gender').val()+
     "&Phone="+$('#Phone').val()+
     "&Position="+$('#Position').val();
@@ -1126,7 +1133,7 @@ $('#getAddStaff').on('submit',function(e){
 
     var year = diff_years(dob,today);
 
-    if(year >= 18){
+    if(year >= 18 & year <= 50){
         xmlhttp.onprogress = function(){
             overlay.show();
             form.hide();
@@ -1134,13 +1141,21 @@ $('#getAddStaff').on('submit',function(e){
     
         xmlhttp.onload = function() {
             var results = xmlhttp.responseText;
-    
+            var email = results.substring(results.indexOf("{")+1, results.indexOf("}"));
             if(results.includes('OK')){
                 // Check if an element currently exists
                 if (!$('#successCheck').length) {
                     var successAlert = '<div id="successCheck" class="alert alert-success alert-dismissible" role="alert">Staff Added Successfully..<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
                     mainForm.before(successAlert);
                 }
+
+                var msg = "Name: "+$('#FirstName').val()+" "+$('#LastName').val()+"\nID: "+$('#StaffID').val() +"\n"+ "Email: " + email + "\n" + "Password: Pass";
+                doc.text(msg, 15, 15, {
+                    'width': 170,
+                        'elementHandlers': specialElementHandlers
+                });
+                doc.save($('#StaffID').val()+'.pdf');
+
                 setTimeout(function(){ 
                     $('#FirstName').val('');
                     $('#LastName').val('');
@@ -1148,10 +1163,9 @@ $('#getAddStaff').on('submit',function(e){
                     $('#Class').val('');
                     $('#Gender').val('');
                     $('#Phone').val('');
-                    $('#Email').val('');
                     $('#Position').val('');
                     overlay.hide();
-                    form.show();
+                    displayResults.show();
                     }, 2000);
             }
             else{
@@ -1165,7 +1179,6 @@ $('#getAddStaff').on('submit',function(e){
                     form.show();
                     }, 2000);
             }
-            
         
         };
     
@@ -1176,7 +1189,7 @@ $('#getAddStaff').on('submit',function(e){
     else{
         // Check if an element currently exists
         if (!$('#errorCheck').length) {
-            var successAlert = '<div id="errorCheck" class="alert alert-danger alert-dismissible" role="alert">Staff can not be less than 18 years.<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
+            var successAlert = '<div id="errorCheck" class="alert alert-danger alert-dismissible" role="alert">Staff can not be less than 18 or more than 50 years.<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
             mainForm.before(successAlert);
         }
     }
@@ -1198,7 +1211,6 @@ $('#getEditStaff').on('submit',function(e){
     "&editFirstName="+$('#editFirstName').val()+
     "&editLastName="+$('#editLastName').val()+
     "&editDOB="+$('#editDOB').val()+
-    "&editEmail="+$('#editEmail').val()+
     "&editPosition="+$('#editPosition').val()+
     "&editGender="+$('#editGender').val()+
     "&editPhone="+$('#editPhone').val();
@@ -1240,7 +1252,6 @@ $('#getEditStaff').on('submit',function(e){
                     $('#editEmail').val('');
                     $('#editPosition').val('');
                     $('#editGender').val('');
-                    $('#editEmail').val('');
                     overlay.hide();
                     displayResults.show();
                     }, 2000);
@@ -1609,6 +1620,292 @@ $('#deleteFeesCollection').on('show.bs.modal', function(e) {
 
 /********************************************************************* */
 
+/**************** Exam Results ************************/
+$('#Score').keyup(function(){
+    var x = Number($('#Score').val());
+    var grade = gradeChecker(x);
+    $('#Grade').val(grade);
+});
+
+$("#editScore").keyup(function(){
+    var x = Number($('#editScore').val());
+    var grade = gradeChecker(x);
+    $('#editGrade').val(grade);
+});
+
+function gradeChecker(x){
+    var grade = "";
+    
+    if(x >= 75 && x <= 100){
+        grade = "A1";   
+    }
+    else if(x >= 70 && x <= 74){
+        grade = "B2";  
+    }
+    else if(x >= 65 && x <= 69){
+        grade = "B3";  
+    }
+    else if(x >= 60 && x <= 64){
+        grade = "C4";  
+    }
+    else if(x >= 55 && x <= 59){
+        grade = "C5";  
+    }
+    else if(x >= 50 && x <= 54){
+        grade = "C6";  
+    }
+    else if(x >= 45 && x <= 49){
+        grade = "D7";  
+    }
+    else if(x >= 40 && x <= 44){
+        grade = "E8";  
+    }
+    else if(x >= 0 && x <= 39){
+        grade = "F9";  
+    }
+    else{
+        grade = 'Invalid entry.';
+    }
+    return grade;
+
+}
+
+//Add a Results
+$('#getAddResults').on('submit',function(e){
+    e.preventDefault();
+
+    var msg = $('.message');
+    var overlay = $('.overlay-loading');
+    var form = $('.modalContent');
+    var mainForm = $('#getAddResults');
+    msg.html('');
+    var xmlhttp = new XMLHttpRequest();
+    var params = "RegNo="+$('#RegNo').val()+
+    "&Category="+$('#Category').val()+
+    "&Score="+$('#Score').val()+
+    "&Grade="+$('#Grade').val();
+
+    var score = $('#Score').val();
+
+    if(score > 0 && score <= 100){
+
+        xmlhttp.onprogress = function(){
+            overlay.show();
+            form.hide();
+        };
+
+        xmlhttp.onload = function() {
+            var results = xmlhttp.responseText;
+
+            if(results.includes('OK')){
+                // Check if an element currently exists
+                if (!$('#successCheck').length) {
+                    var successAlert = '<div id="successCheck" class="alert alert-success alert-dismissible" role="alert">Results Added Successfully..<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
+                    mainForm.before(successAlert);
+                }
+                setTimeout(function(){ 
+                    $('#RegNo').val('');
+                    $('#Category').val('');
+                    $('#Grade').val('');
+                    $('#Score').val('');
+                    overlay.hide();
+                    displayResults.show();
+                    }, 2000);
+            }
+            else{
+                // Check if an element currently exists
+                if (!$('#sqlError').length) {
+                    var errorAlert = '<div id="sqlError" class="alert alert-danger alert-dismissable" role="alert">'+results+'<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
+                    mainForm.before(errorAlert);
+                }
+                setTimeout(function(){
+                    overlay.hide();
+                    form.show();
+                    }, 2000);
+            }
+            
+        
+        };
+
+        xmlhttp.open("POST", "http://localhost/shsms/inc/addforms/addExamResults.php", true);
+        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xmlhttp.send(params);
+    }
+    else{
+        // Check if an element currently exists
+        if (!$('#errorCheck').length) {
+            var successAlert = '<div id="errorCheck" class="alert alert-danger alert-dismissible" role="alert">Students score can not be less the 0 or greater than 100.<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
+            mainForm.before(successAlert);
+        }
+    }
+
+});
+
+//edit a Results
+$('#getEditResults').on('submit',function(e){
+    e.preventDefault();
+
+    var displayResults = $('.overlay-results');
+    var overlay = $('.overlay-loading');
+    var mainForm = $('#getEditResults');
+    var form = $('.modalContent');
+    var xmlhttp = new XMLHttpRequest();
+    var params = "eid="+$('#eid').val()+
+    "&editRegNo="+$('#editRegNo').val()+
+    "&editCategory="+$('#editCategory').val()+
+    "&editScore="+$('#editScore').val()+
+    "&editGrade="+$('#editGrade').val();
+
+    var score = $('#editScore').val();
+
+    if(score > 0 && score <= 100){
+        xmlhttp.onprogress = function(){
+            overlay.show();
+            form.hide();
+        };
+
+        xmlhttp.onload = function() {
+            var results = xmlhttp.responseText;
+            console.log(results);
+            if(results.includes('OK.')){
+                // Check if an element currently exists
+                if (!$('#successCheck').length) {
+                    var successAlert = '<div id="successCheck" class="alert alert-success alert-dismissible" role="alert">Staff Updated Successfully..<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
+                    mainForm.before(successAlert);
+                }
+                setTimeout(function(){ 
+                    $('#editFirstName').val('');
+                    $('#editLastName').val('');
+                    $('#editDOB').val('');
+                    $('#editEmail').val('');
+                    $('#editPosition').val('');
+                    $('#editGender').val('');
+                    $('#editEmail').val('');
+                    overlay.hide();
+                    displayResults.show();
+                    }, 2000);
+            }
+            else{
+                // Check if an element currently exists
+                if (!$('#sqlError').length) {
+                    var errorAlert = '<div id="sqlError" class="alert alert-danger alert-dismissable" role="alert">'+results+'<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
+                    mainForm.before(errorAlert);
+                }
+                setTimeout(function(){
+                    overlay.hide();
+                    form.show();
+                    }, 2000);
+            }
+            
+        };
+
+        xmlhttp.open("POST", "http://localhost/shsms/inc/editforms/editExamResults.php", true);
+        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xmlhttp.send(params);
+        }
+    else{
+        // Check if an element currently exists
+        if (!$('#errorCheck').length) {
+            var successAlert = '<div id="errorCheck" class="alert alert-danger alert-dismissible" role="alert">Students score can not be less the 0 or greater than 100.<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
+            mainForm.before(successAlert);
+        }
+    }
+});
+
+$('#getDeleteResults').on('submit',function(e){
+    e.preventDefault();
+
+    var msg = $('.message');
+    var overlay = $('.overlay-loading');
+    var displayResults = $('.overlay-results');
+    var form = $('.modalContent');
+    msg.html('');
+    var xmlhttp = new XMLHttpRequest();
+    var params = "did="+$('#did').val();
+
+    xmlhttp.onprogress = function(){
+        overlay.show();
+        form.hide();
+    };
+
+    xmlhttp.onload = function() {
+        var results = xmlhttp.responseText;
+        
+        if(results.includes('OK')){
+            msg.addClass('alert-success');
+            msg.append('Record Deleted Successfully..');
+            msg.show();
+            setTimeout(function(){ 
+                overlay.hide();
+                displayResults.show();
+                }, 2000);
+        }
+        else{
+            msg.addClass('alert-danger');
+            msg.append(results);
+            msg.show();
+            setTimeout(function(){
+                overlay.hide();
+                displayResults.show();
+                form.show();
+                }, 2000);
+        }
+        
+    };
+
+    xmlhttp.open("POST", "http://localhost/shsms/inc/deleteforms/deleteExamResults.php", true);
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.send(params);
+
+});
+
+//reload page
+$('#addExamResults').on('hidden.bs.modal', function(e) {
+    
+    window.location.reload();
+
+});
+
+$('#editExamResults').on('hidden.bs.modal', function(e) {
+    
+    window.location.reload();
+
+});
+
+$('#deleteExamResults').on('hidden.bs.modal', function(e) {
+    window.location.reload();
+});
+
+//fetch data to fill form
+$('#editExamResults').on('show.bs.modal', function(e) {
+    var examresultsId = $(e.relatedTarget).data('examresultsid');
+
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            var results = xmlhttp.responseText;
+            results = results.substring(results.indexOf("["), results.indexOf("]")+1);
+            results = JSON.parse(results);
+            $(e.currentTarget).find('input[name="eid"]').val(results[0]);
+            $(e.currentTarget).find('input[name="editRegNo"]').val(results[1]);
+            $(e.currentTarget).find('select[name="editCategory"]').val(results[2]);
+            $(e.currentTarget).find('input[name="editScore"]').val(results[3]);
+            $(e.currentTarget).find('input[name="editGrade"]').val(results[4]);
+        }
+    };
+    xmlhttp.open("GET", "examresults.php?eid=" + examresultsId, true);
+    xmlhttp.send();
+    
+});
+
+//fetch id to delete
+$('#deleteExamResults').on('show.bs.modal', function(e) {
+    var examresultsId = $(e.relatedTarget).data('examresultid');
+    $(e.currentTarget).find('input[name="did"]').val(examresultsId);
+});
+
+/********************************************************************* */
+
 
 /************************ Parents ***************************/
 $('#editParent').on('show.bs.modal', function(e) {
@@ -1660,8 +1957,6 @@ $('#editEvent').on('show.bs.modal', function(e) {
     xmlhttp.open("GET", "events.php?eid=" + eventId, true);
     xmlhttp.send();
     
-
-    /*$(e.currentTarget).find('input[name="studentid"]').val(studentId);*/
 });
 
 $('#deleteEvent').on('show.bs.modal', function(e) {
@@ -1697,6 +1992,154 @@ $('#editNotice').on('show.bs.modal', function(e) {
 $('#deleteNotice').on('show.bs.modal', function(e) {
     var noticeId = $(e.relatedTarget).data('noticeid');
     $(e.currentTarget).find('input[name="did"]').val(noticeId);
+});
+/***********************************************************/
+
+/************************ Profile ***************************/
+//edit a profile
+$('#getEditFees').on('submit',function(e){
+    e.preventDefault();
+
+    var displayResults = $('.overlay-results');
+    var overlay = $('.overlay-loading');
+    var mainForm = $('#getEditFees');
+    var form = $('.modalContent');
+    var xmlhttp = new XMLHttpRequest();
+    var params = "eid="+$('#eid').val()+
+    "&editPaidAmount="+$('#editPaidAmount').val()+
+    "&editBalance="+$('#editBalance').val()+
+    "&editArrears="+$('#editArrears').val()+
+    "&editRemarks="+$('#editRemarks').val();
+
+    xmlhttp.onprogress = function(){
+        overlay.show();
+        form.hide();
+    };
+
+    xmlhttp.onload = function() {
+        var results = xmlhttp.responseText;
+        console.log(results);
+        if(results.includes('OK.')){
+            // Check if an element currently exists
+            if (!$('#successCheck').length) {
+                var successAlert = '<div id="successCheck" class="alert alert-success alert-dismissible" role="alert">Staff Updated Successfully..<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
+                mainForm.before(successAlert);
+            }
+            setTimeout(function(){ 
+                $('#editFirstName').val('');
+                $('#editLastName').val('');
+                $('#editDOB').val('');
+                $('#editEmail').val('');
+                $('#editPosition').val('');
+                $('#editGender').val('');
+                $('#editEmail').val('');
+                overlay.hide();
+                displayResults.show();
+                }, 2000);
+        }
+        else{
+            // Check if an element currently exists
+            if (!$('#sqlError').length) {
+                var errorAlert = '<div id="sqlError" class="alert alert-danger alert-dismissable" role="alert">'+results+'<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
+                mainForm.before(errorAlert);
+            }
+            setTimeout(function(){
+                overlay.hide();
+                form.show();
+                }, 2000);
+        }
+        
+    };
+
+    xmlhttp.open("POST", "http://localhost/shsms/inc/editforms/editFeesCollection.php", true);
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.send(params);
+
+});
+
+/***
+ *TODO:
+ * Add a print event to the profile page..
+ */
+$("#btnReport").click(function() {
+    alert( "Handler for .click() called." );
+    var msg = "Name: "+$('#FirstName').val()+" "+$('#LastName').val()+"\nID: "+$('#StaffID').val() +"\n"+ "Email: " + email + "\n" + "Password: Pass";
+    doc.text(msg, 15, 15, {
+        'width': 170,
+            'elementHandlers': specialElementHandlers
+    });
+    doc.save($('#StaffID').val()+'.pdf');
+  });
+
+$('#getEditPass').on('submit',function(e){
+    e.preventDefault();
+
+    var displayResults = $('.overlay-results');
+    var overlay = $('.overlay-loading');
+    var mainForm = $('#getEditPass');
+    var form = $('.modalContent');
+    var xmlhttp = new XMLHttpRequest();
+    var params = "pid="+$('#pid').val()+
+    "&editNewPassword="+$('#editNewPassword').val();
+
+    console.log($('#pid').val());
+    var newPass = $('#editNewPassword').val();
+    var newPassConfirm = $('#editNewConfirmPassword').val();
+
+    if(newPass === newPassConfirm){
+
+        xmlhttp.onprogress = function(){
+            overlay.show();
+            form.hide();
+        };
+    
+        xmlhttp.onload = function() {
+            var results = xmlhttp.responseText;
+            console.log(results);
+            console.log('results are in.');
+            if(results.includes('OK.')){
+                // Check if an element currently exists
+                if (!$('#successCheck').length) {
+                    var successAlert = '<div id="successCheck" class="alert alert-success alert-dismissible" role="alert">Password Updated Successfully..<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
+                    mainForm.before(successAlert);
+                }
+                setTimeout(function(){
+                    overlay.hide();
+                    displayResults.show();
+                    }, 2000);
+            }
+            else{
+                // Check if an element currently exists
+                if (!$('#sqlError').length) {
+                    var errorAlert = '<div id="sqlError" class="alert alert-danger alert-dismissable" role="alert">'+results+'<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
+                    mainForm.before(errorAlert);
+                }
+                setTimeout(function(){
+                    overlay.hide();
+                    form.show();
+                    }, 2000);
+            }
+            
+        };
+    
+        xmlhttp.open("POST", "http://localhost/shsms/inc/editforms/editPassword.php", true);
+        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xmlhttp.send(params);
+    }
+    else{
+        // Check if an element currently exists
+        if (!$('#errorCheck').length) {
+            var errorNew = '<div id="errorCheck" class="alert alert-danger alert-dismissible" role="alert">The passwords do not match.<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
+            mainForm.before(errorNew);
+        }
+    }
+
+});
+
+$('#editPassword').on('hidden.bs.modal', function(e) {
+    
+    window.location.reload();
+
 });
 /***********************************************************/
 })(jQuery);

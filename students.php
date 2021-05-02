@@ -49,12 +49,6 @@
 <div class="container py-3 justify-content-center">
         
         <div class="table-responsive text-center">
-            <?php if($msg != ''):?>
-                <div class="alert <?php echo $msgClass; ?>">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                <?php echo $msg; ?></div>
-            <?php endif?>
-
         <div id="toolbar">
             <!-- Button trigger modal -->
             <?php if(isset($_SESSION['UserType']) && $_SESSION['UserType'] == 'admin'):?>
@@ -86,25 +80,27 @@
 </div>
 
 <!-- Add student Modal -->
-<div class="modal fade" id="addStudent" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" data-bs-backdrop="static" id="addStudent" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
-        <div class="overlay-loading">
-                    <div class="d-flex justify-content-center m-5">
-                        <div class="spinner-grow text-primary" style="width: 5rem; height: 5rem;" role="status">
-                            <span class="visually-hidden">Loading...</span>
-                        </div>
-                    </div>
-                    <p class="text-center lead text-secondary"><strong>Processing Form ...</strong></p>
-                </div>
-                <div class="overlay-results">
-                    <div class="text-center">
-                        <i class="fa fa-check bg-success align-middle text-light p-3 mt-4 mb-2" style="font-size:50px;border-radius:60px;"></i>
-                        <p class="lead text-success mb-5"><strong>Record Added Successfully...</strong></p>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Return to page</button>
+            <div class="overlay-loading">
+                <div class="d-flex justify-content-center m-5">
+                    <div class="spinner-grow text-primary" style="width: 5rem; height: 5rem;" role="status">
+                        <span class="visually-hidden">Loading...</span>
                     </div>
                 </div>
-                <div class="modalContent">
+                <p class="text-center lead text-secondary"><strong>Processing Form ...</strong></p>
+            </div>
+
+            <div class="overlay-results">
+                <div class="text-center">
+                    <i class="fa fa-check bg-success align-middle text-light p-3 mt-4 mb-2" style="font-size:50px;border-radius:60px;"></i>
+                    <p class="lead text-success mb-5"><strong>Student Added Successfully...</strong></p>
+                    <p class="lead text-dark mb-5"><strong>Kindly forward the generated report to the student.</strong></p>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Return to page</button>
+                </div>
+            </div>
+            <div class="modalContent">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Student's Form</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
