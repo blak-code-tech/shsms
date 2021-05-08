@@ -18,6 +18,7 @@ if(isset($_POST['StudentID'])){
     $dob = $_POST['DOB'];
     $gender = $_POST['Gender'];
     $classID = $_POST["Class"];
+    $courseID = $_POST["Course"];
     $hostelID = $_POST['Hostel'];
     //$parentID = $_POST['Guardian'];
      
@@ -30,7 +31,7 @@ if(isset($_POST['StudentID'])){
     $parentLastName = ucwords($parentLastName);
     $parentPhone = $_POST['ParentsPhone'];
     $parentAddress = $_POST['ParentsAddress'];
-    $parentEmail = $_POST['ParentsEmail'];
+    $parentEmail = $_POST['parentEmail'];
  
     $query = "INSERT INTO `parents`(`FirstName`,`LastName`, `Phone`, `HomeAddress`, `Email`) 
     VALUES ('$parentFirstName','$parentLastName','$parentPhone','$parentAddress','$parentEmail')";
@@ -45,10 +46,9 @@ if(isset($_POST['StudentID'])){
             die('Query failed: '.mysqli_error($conn));   
         }else{
             $row = mysqli_fetch_row($checkResult);
-            var_dump($row);
             $parentID = $row[0];
-            $query = "INSERT INTO `students`( `StudentID`,`FirstName`, `LastName`, `Gender`, `DOB`, `HostelID`, `ClassID`,`ParentID`) 
-            VALUES ('$studentID','$fname','$lname','$gender','$dob',$hostelID,$classID,$parentID)";
+            $query = "INSERT INTO `students`( `StudentID`,`FirstName`, `LastName`,`Email`, `Gender`, `DOB`, `HostelID`, `ClassID`,`CourseID`,`ParentID`) 
+            VALUES ('$studentID','$fname','$lname','$email','$gender','$dob',$hostelID,$classID,$courseID,$parentID)";
             $check = mysqli_query($conn, $query);
 
             if (!$check) {

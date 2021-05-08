@@ -2,11 +2,11 @@
 require('../../config/config.php');
 require('../../config/db.php');
 
-if(isset($_POST['SubjectName'])){
+if(isset($_POST['CourseName'])){
 
-    $sname = $_POST['SubjectName'];
+    $sname = $_POST['CourseName'];
 
-    $query = "INSERT INTO `subjects`(`Name`) VALUES ('$sname')";
+    $query = "INSERT INTO `courses`(`Name`) VALUES ('$sname')";
     $check = mysqli_query($conn, $query);
 
     if (!$check) {

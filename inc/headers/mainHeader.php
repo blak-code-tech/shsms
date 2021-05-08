@@ -21,6 +21,9 @@
 	<link rel="stylesheet" type="text/css" href="css/main.css">-->
 
     <style>
+        .navbar-brand{
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
         .navbar-brand.bg{
             color: #222;
             width: 140px;

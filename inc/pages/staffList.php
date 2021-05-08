@@ -7,6 +7,7 @@
                 <th data-field="FirstName" data-sortable="true">Name</th>
                 <th data-field="DOB" data-sortable="true">Date of Birth</th>
                 <th data-field="Position" data-sortable="true">Position</th>
+                <th data-field="Subject" data-sortable="true">Subject</th>
                 <th data-field="Gender" data-sortable="true">Gender</th>
                 <th data-field="Email" data-sortable="true">Email</th>
                 <th data-field="Phone" data-sortable="true">Phone</th>
@@ -34,6 +35,7 @@
                                 <td class="p-2"><?php echo $row["FirstName"].' '.$row["LastName"];?></td>
                                 <td class="p-2"><?php echo $row["DOB"];?></td> 
                                 <td class="p-2"><?php echo $row["Position"];?></td> 
+                                <td class="p-2"><?php echo $row["Subject"];?></td> 
                                 <td class="p-2"><?php echo $row["Gender"];?></td> 
                                 <td class="p-2"><?php echo $row["Email"];?></td> 
                                 <td class="p-2"><?php echo $row["Phone"];?></td> 

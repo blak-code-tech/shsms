@@ -81,14 +81,22 @@ function getitem($table,$id){
    require('config/db.php');
 
    $query="SELECT * FROM $table WHERE ID = $id";
+   
    $check = mysqli_query($conn, $query);
    if (!$check) {
         die('Query failed: '.mysqli_error($conn));
         echo 'Query failed: '.mysqli_error($conn);
    }else{
-         $row = mysqli_fetch_array($check);
+        
+        $row = mysqli_fetch_array($check);
         if($table == 'examcategory'){
             echo $row["Term"].' ('.$row["Section"].')';
+        }
+        else if($table == 'positions'){
+            return $row["Position"];
+        }
+        else if($table == 'subjects'){
+            return $row["Name"];
         }
         else{
             $fname = $row['FirstName'];
@@ -134,7 +142,7 @@ function generateEmail($firstname, $lastname, $conn, $type){
     if($type === 'staff'){
         $query="SELECT Email FROM staff";
     }
-    else if($type === 'student'){
+    else{
         $query="SELECT Email FROM students";
     }
     
@@ -151,7 +159,7 @@ function generateEmail($firstname, $lastname, $conn, $type){
         if($type === 'staff'){
             $suffix = '@edukate.edu';
         }
-        else if($type === 'student'){
+        else{
             $suffix = '@st.edukate.edu';
         }
         $prefix = $lastname.$firstname;

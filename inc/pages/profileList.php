@@ -8,7 +8,7 @@
         <th data-field="DOB">Date of Birth</th>
         <th data-field="Gender">Gender</th>
         <th data-field="Email">Email</th>
-        <?php if($user === 'staff' || $user === 'admin'):?>
+        <?php if($user === 'Head Teacher' || $user === 'Assistant Head Teacher' || $user === 'Teacher' || $user === 'admin'):?>
         <th data-field="Phone">Phone</th>
         <?php endif; ?>
         <th>Actions</th>
@@ -21,7 +21,7 @@
     $id = $_SESSION['id'];
     
 
-    if($user === 'staff'){
+    if($user === 'Head Teacher' || $user === 'Assistant Head Teacher' || $user === 'Teacher' ){
         $query = "SELECT * FROM staff where StaffID = '$id'";
     }
     else if($user === 'student'){
@@ -47,7 +47,7 @@
         <td class="p-2"><?php echo $row["DOB"];?></td>
         <td class="p-2"><?php echo $row["Gender"];?></td>
         <td class="p-2"><?php echo $row["Email"];?></td>
-        <?php if($_SESSION['UserType'] === 'staff'):?>
+        <?php if($user === 'Head Teacher' || $user === 'Assistant Head Teacher' || $user === 'Teacher' || $user === 'admin'):?>
         <td class="p-2"><?php echo $row["Phone"];?></td>
         <?php endif; ?>
         <td class="p-2">
