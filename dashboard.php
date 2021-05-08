@@ -13,16 +13,14 @@ if (isset($_SESSION["id"])) {?>
 <?php include('inc/navbars/mainNavbar.php')?>
 
 <header class="container mt-5 col-xxl-8 px-5 py-5">
-    <h1 class="text-center text-muted" data-aos="zoom-in"
-    data-aos-duration="500" style="font-size:50px;">Dashboard</h1>
+    <h1 class="text-center text-muted" data-aos="zoom-in" data-aos-duration="500" style="font-size:50px;">Dashboard</h1>
     <hr class="container col-xxl-8">
-
 </header>
 
-<section id="dashboad-items" class="container-fluid col-xxl-8 px-5 py-3">
-        <div class="card-group">
-            <div class="card mb-4 mx-2 rounded-3 shadow" data-aos="fade-up"
-                    data-aos-duration="500">
+<section id="dashboad-items" class="container-fluid px-5 py-3">
+    <div class="row row-cols-1 row-cols-md-4 g-4">
+        <div class="col">
+            <div class="card rounded-3 shadow" data-aos="fade-up" data-aos-duration="500">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <i class="fa fa-user fa-3x text-warning"></i>
@@ -32,12 +30,15 @@ if (isset($_SESSION["id"])) {?>
                         </div>
                     </div>
                     <hr>
-                    <a class="btn btn-block hvr-bounce-to-right" href="<?php echo ROOT_URL;?>students.php">View <i class="fa fa-angle-double-right"></i></a>
+                    <a class="btn btn-block hvr-bounce-to-right" href="<?php echo ROOT_URL;?>students.php">View <i
+                            class="fa fa-angle-double-right"></i></a>
                 </div>
             </div>
-                  
-            <div class="card mb-4 mx-2 rounded-3 shadow" data-aos="fade-up"
-                 data-aos-duration="500" data-aos-delay="250">
+        </div>
+
+        <div class="col">
+            <div class="card rounded-3 shadow" data-aos="fade-up" data-aos-duration="500"
+                data-aos-delay="250">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <i class="fa fa-book fa-3x text-secondary"></i>
@@ -47,13 +48,15 @@ if (isset($_SESSION["id"])) {?>
                         </div>
                     </div>
                     <hr>
-                    <a class="btn btn-block hvr-bounce-to-right" href="<?php echo ROOT_URL;?>subjects.php">View <i class="fa fa-angle-double-right"></i></a>
+                    <a class="btn btn-block hvr-bounce-to-right" href="<?php echo ROOT_URL;?>subjects.php">View <i
+                            class="fa fa-angle-double-right"></i></a>
                 </div>
             </div>
+        </div>
 
-            <div class="card mb-4 mx-2 rounded-3 shadow"
-            data-aos="fade-up"
-                data-aos-duration="500" data-aos-delay="350">
+        <div class="col">
+            <div class="card rounded-3 shadow" data-aos="fade-up" data-aos-duration="500"
+                data-aos-delay="350">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <i class="fa fa-credit-card fa-3x text-success"></i>
@@ -63,13 +66,16 @@ if (isset($_SESSION["id"])) {?>
                         </div>
                     </div>
                     <hr>
-                    <a class="btn btn-block hvr-bounce-to-right" href="<?php echo ROOT_URL;?>banks.php">View <i class="fa fa-angle-double-right"></i></a>
+                    <a class="btn btn-block hvr-bounce-to-right" href="<?php echo ROOT_URL;?>banks.php">View <i
+                            class="fa fa-angle-double-right"></i></a>
 
                 </div>
             </div>
+        </div>
 
-            <div class="card mb-4 mx-2 rounded-3 shadow" data-aos="fade-up"
-                data-aos-duration="500" data-aos-delay="450">
+        <div class="col">
+            <div class="card rounded-3 shadow" data-aos="fade-up" data-aos-duration="500"
+                data-aos-delay="450">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <i class="fa fa-graduation-cap fa-3x text-info"></i>
@@ -79,16 +85,15 @@ if (isset($_SESSION["id"])) {?>
                         </div>
                     </div>
                     <hr>
-                    <a class="btn btn-block hvr-bounce-to-right" href="<?php echo ROOT_URL;?>staff.php">View <i class="fa fa-angle-double-right"></i></a>
+                    <a class="btn btn-block hvr-bounce-to-right" href="<?php echo ROOT_URL;?>staff.php">View <i
+                            class="fa fa-angle-double-right"></i></a>
 
                 </div>
             </div>
-
         </div>
-        
-        <div class="card-group">
-            <div class="card mb-4 mx-2 rounded-3 shadow" data-aos="fade-up"
-                data-aos-duration="500" data-aos-delay="550">
+
+        <div class="col">
+            <div class="card rounded-3 shadow" data-aos="fade-up" data-aos-duration="500" data-aos-delay="550">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <i class="fa fa-money fa-3x text-warning"></i>
@@ -98,13 +103,15 @@ if (isset($_SESSION["id"])) {?>
                         </div>
                     </div>
                     <hr>
-                    <a class="btn btn-block hvr-bounce-to-right" href="<?php echo ROOT_URL;?>feescollection.php">View <i class="fa fa-angle-double-right"></i></a>
+                    <a class="btn btn-block hvr-bounce-to-right" href="<?php echo ROOT_URL;?>feescollection.php">View <i
+                            class="fa fa-angle-double-right"></i></a>
 
                 </div>
             </div>
-                  
-            <div class="card mb-4 mx-2 rounded-3 shadow" data-aos="fade-up"
-                data-aos-duration="500" data-aos-delay="650">
+        </div>
+
+        <div class="col">
+            <div class="card rounded-3 shadow" data-aos="fade-up" data-aos-duration="500" data-aos-delay="650">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <i class="fa fa-flask fa-3x text-secondary"></i>
@@ -114,13 +121,15 @@ if (isset($_SESSION["id"])) {?>
                         </div>
                     </div>
                     <hr>
-                    <a class="btn btn-block hvr-bounce-to-right" href="<?php echo ROOT_URL;?>classes.php">View <i class="fa fa-angle-double-right"></i></a>
+                    <a class="btn btn-block hvr-bounce-to-right" href="<?php echo ROOT_URL;?>classes.php">View <i
+                            class="fa fa-angle-double-right"></i></a>
 
                 </div>
             </div>
+        </div>
 
-            <div class="card mb-4 mx-2 rounded-3 shadow" data-aos="fade-up"
-                data-aos-duration="500" data-aos-delay="750">
+        <div class="col">
+            <div class="card rounded-3 shadow" data-aos="fade-up" data-aos-duration="500" data-aos-delay="750">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <i class="fa fa-home fa-3x text-success"></i>
@@ -130,13 +139,15 @@ if (isset($_SESSION["id"])) {?>
                         </div>
                     </div>
                     <hr>
-                    <a class="btn btn-block hvr-bounce-to-right" href="<?php echo ROOT_URL;?>hostels.php">View <i class="fa fa-angle-double-right"></i></a>
+                    <a class="btn btn-block hvr-bounce-to-right" href="<?php echo ROOT_URL;?>hostels.php">View <i
+                            class="fa fa-angle-double-right"></i></a>
 
                 </div>
             </div>
+        </div>
 
-            <div class="card mb-4 mx-2 rounded-3 shadow" data-aos="fade-up"
-                data-aos-duration="500" data-aos-delay="850">
+        <div class="col">
+            <div class="card rounded-3 shadow" data-aos="fade-up" data-aos-duration="500" data-aos-delay="850">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <i class="fa fa-flag fa-3x text-info"></i>
@@ -146,16 +157,15 @@ if (isset($_SESSION["id"])) {?>
                         </div>
                     </div>
                     <hr>
-                    <a class="btn btn-block hvr-bounce-to-right" href="<?php echo ROOT_URL;?>events.php">View <i class="fa fa-angle-double-right"></i></a>
+                    <a class="btn btn-block hvr-bounce-to-right" href="<?php echo ROOT_URL;?>events.php">View <i
+                            class="fa fa-angle-double-right"></i></a>
 
                 </div>
             </div>
-
         </div>
-        
-        <div class="card-group">
-            <div class="card mb-4 mx-2 rounded-3 shadow" data-aos="fade-up"
-                data-aos-duration="500" data-aos-delay="250">
+
+        <div class="col">
+            <div class="card rounded-3 shadow" data-aos="fade-up" data-aos-duration="500" data-aos-delay="250">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <i class="fa fa-clipboard fa-3x text-warning"></i>
@@ -165,13 +175,15 @@ if (isset($_SESSION["id"])) {?>
                         </div>
                     </div>
                     <hr>
-                    <a class="btn btn-block hvr-bounce-to-right" href="<?php echo ROOT_URL;?>notices.php">View <i class="fa fa-angle-double-right"></i></a>
+                    <a class="btn btn-block hvr-bounce-to-right" href="<?php echo ROOT_URL;?>notices.php">View <i
+                            class="fa fa-angle-double-right"></i></a>
 
                 </div>
             </div>
-                  
-            <div class="card mb-4 mx-2 rounded-3 shadow" data-aos="fade-up"
-                data-aos-duration="500" data-aos-delay="350">
+        </div>
+
+        <div class="col">
+            <div class="card rounded-3 shadow" data-aos="fade-up" data-aos-duration="500" data-aos-delay="350">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <i class="fa fa-users fa-3x text-secondary"></i>
@@ -181,13 +193,15 @@ if (isset($_SESSION["id"])) {?>
                         </div>
                     </div>
                     <hr>
-                    <a class="btn btn-block hvr-bounce-to-right" href="<?php echo ROOT_URL;?>parents.php">View <i class="fa fa-angle-double-right"></i></a>
+                    <a class="btn btn-block hvr-bounce-to-right" href="<?php echo ROOT_URL;?>parents.php">View <i
+                            class="fa fa-angle-double-right"></i></a>
 
                 </div>
             </div>
+        </div>
 
-            <div class="card mb-4 mx-2 rounded-3 shadow" data-aos="fade-up"
-                data-aos-duration="500" data-aos-delay="450">
+        <div class="col">
+            <div class="card rounded-3 shadow" data-aos="fade-up" data-aos-duration="500" data-aos-delay="450">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <i class="fa fa-sort-amount-asc fa-3x text-success"></i>
@@ -201,9 +215,10 @@ if (isset($_SESSION["id"])) {?>
 
                 </div>
             </div>
+        </div>
 
-            <div class="card mb-4 mx-2 rounded-3 shadow" data-aos="fade-up"
-                    data-aos-duration="500" data-aos-delay="550">
+        <div class="col">
+            <div class="card rounded-3 shadow" data-aos="fade-up" data-aos-duration="500" data-aos-delay="550">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <i class="fa fa-pencil fa-3x text-info"></i>
@@ -213,31 +228,29 @@ if (isset($_SESSION["id"])) {?>
                         </div>
                     </div>
                     <hr>
-                    <a class="btn btn-block hvr-bounce-to-right" href="<?php echo ROOT_URL;?>examresults.php">View <i class="fa fa-angle-double-right"></i></a>
+                    <a class="btn btn-block hvr-bounce-to-right" href="<?php echo ROOT_URL;?>examresults.php">View <i
+                            class="fa fa-angle-double-right"></i></a>
 
                 </div>
             </div>
-
         </div>
-        
+    </div>
 
 </section>
 
-
+<!--
 <section class="container-fluid px-5 py-3">
     <div class="card-group">
         <div class="card mb-4 mt-3 mx-2 rounded-3 shadow">
-            
+
             <div class="card-body">
-            <div class="card-title pb-2">
-                <h5 data-aos="zoom-in-up"
-     data-aos-duration="500">Recently Fees Collection</p>
-                <p class="text-muted lead" style="font-size:18px;">Fees collection by date</p>
-            </div>
+                <div class="card-title pb-2">
+                    <h5 data-aos="zoom-in-up" data-aos-duration="500">Recently Fees Collection</p>
+                        <p class="text-muted lead" style="font-size:18px;">Fees collection by date</p>
+                </div>
                 <div class="table-responsize">
                     <table class="table">
-                        <thead data-aos="fade-up"
-     data-aos-duration="500">
+                        <thead data-aos="fade-up" data-aos-duration="500">
                             <tr>
                                 <th class="lead">ID</th>
                                 <th class="lead">Student</th>
@@ -247,10 +260,9 @@ if (isset($_SESSION["id"])) {?>
                             </tr>
                         </thead>
 
-                        <tbody style="font-size: 15px;" data-aos="fade-up"
-     data-aos-duration="500" data-aos-delay="200">
-    
-                                <?php
+                        <tbody style="font-size: 15px;" data-aos="fade-up" data-aos-duration="500" data-aos-delay="200">
+
+                            <?php
                                     ob_start();
                                 
                                     $num = 0;
@@ -268,22 +280,23 @@ if (isset($_SESSION["id"])) {?>
                                             # code...
 
                                             ?>
-                                            <?php while ($row = mysqli_fetch_assoc($check)):?>
+                            <?php while ($row = mysqli_fetch_assoc($check)):?>
 
-                                            <tr class="p-1">
-                                                
-                                                    <td><?php echo $row["ID"];?></td>
-                                                    <td><?php echo $row["Student"];?></td>
-                                                    <td><?php echo $row["PaidAmount"];?></td>  
-                                                    <td><?php echo $row["Date"];?></td>  
-                                                    <td><?php echo $row["Remarks"];?></td>  
+                            <tr class="p-1">
 
-                                            </tr>
+                                <td><?php echo $row["ID"];?></td>
+                                <td><?php echo $row["Student"];?></td>
+                                <td><?php echo $row["PaidAmount"];?></td>
+                                <td><?php echo $row["Date"];?></td>
+                                <td><?php echo $row["Remarks"];?></td>
 
-                                                    <?php $num += 1;?>
-                                            <?php endwhile ?>
-                                            <caption>Number of students : <span class="badge bg-success"><?php echo $num ;?></span></caption>
-                                        <?php
+                            </tr>
+
+                            <?php $num += 1;?>
+                            <?php endwhile ?>
+                            <caption>Number of students : <span class="badge bg-success"><?php echo $num ;?></span>
+                            </caption>
+                            <?php
 
                                         }else{
                                             echo '<div class="alert alert-info">No Records to Show</div>';
@@ -299,7 +312,7 @@ if (isset($_SESSION["id"])) {?>
             </div>
         </div>
     </div>
-</section>
+</section>-->
 
 <?php include('inc/footers/mainFooter.php')?>
 <?php include('inc/foots/mainFoot.php')?>

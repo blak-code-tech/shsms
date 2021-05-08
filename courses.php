@@ -9,7 +9,7 @@ if (isset($_SESSION["id"])) {?>
     if(isset($_REQUEST["eid"])){
         $id = $_REQUEST["eid"];
         if ($id != 0) {
-            $query = ("SELECT * FROM subjects WHERE ID=$id");
+            $query = ("SELECT * FROM courses WHERE ID=$id");
             $check_edit = mysqli_query($conn, $query);
 
             if (!$check_edit) {
@@ -31,10 +31,10 @@ if (isset($_SESSION["id"])) {?>
 
 <?php include('inc/headers/mainHeader.php')?>
 
-<?php include('inc/navbars/mainNavbar.php')?>
+<?php include('inc/navbars/mainNavbar.php'); $user = $_SESSION['UserType'];?>
 
 <header class="container mt-5 px-5 py-5">
-    <h1 class="text-center text-muted" data-aos="zoom-in" data-aos-duration="500" style="font-size:50px;">Subjects</h1>
+    <h1 class="text-center text-muted" data-aos="zoom-in" data-aos-duration="500" style="font-size:50px;">Courses</h1>
     <hr class="container">
 </header>
 
@@ -49,11 +49,11 @@ if (isset($_SESSION["id"])) {?>
         <?php endif?>
 
         <div id="toolbar">
-            <?php if(isset($_SESSION['UserType']) && $_SESSION['UserType'] == 'admin'):?>
+            <?php if($user == 'admin' || $user == 'Head Teacher' || $user == 'Assistant Head Teacher'):?>
             <!-- Button trigger modal -->
-            <a data-bs-toggle="modal" data-bs-target="#addSubject" type="button" href="addstudent.php"
+            <a data-bs-toggle="modal" data-bs-target="#addCourse" type="button"
                 class="btn btn-primary mx-2">
-                Add New Subject
+                Add New Course
             </a>
             <?php endif; ?>
         </div>
@@ -63,14 +63,14 @@ if (isset($_SESSION["id"])) {?>
             data-pagination-next-text="next" data-pagination-h-align="left" data-pagination-detail-h-align="right"
             data-page-list="[10,20,30,40,50,All]" data-toolbar="#toolbar">
 
-            <?php include 'inc/pages/subjectList.php';?>
+            <?php include 'inc/pages/coursesList.php';?>
 
         </table>
     </div>
 </div>
 
 
-<div class="modal fade" id="addSubject" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" data-bs-backdrop="static" id="addCourse" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="overlay-loading">
@@ -91,33 +91,32 @@ if (isset($_SESSION["id"])) {?>
             </div>
             <div class="modalContent">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Subject's Form</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Courses Form</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="getAddSubject">
+                    <form id="getAddCourse">
                         <div class="row">
                             <div class="form-group">
-                                <label for="firstname">Subjects's Name</label>
-                                <input class="form-control" required="" id="SubjectName" name="SubjectName"
-                                    placeholder="Enter the subject name" />
+                                <label for="firstname">Course</label>
+                                <input class="form-control" required="" id="CourseName" name="CourseName"
+                                    placeholder="Enter the course name" />
                                 <br>
                             </div>
 
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <input type="submit" name="addSubmit" class="btn btn-primary" value="Add Student" />
+                                <input type="submit" name="addSubmit" class="btn btn-primary" value="Add Course" />
                             </div>
                         </div>
                     </form>
-             </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-
-<div class="modal fade" id="editSubject" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="editCourse" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="overlay-loading">
@@ -138,17 +137,16 @@ if (isset($_SESSION["id"])) {?>
             </div>
             <div class="modalContent">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Subject's Form</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Courses Form</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="getEditSubject">
+                    <form id="getEditCourse">
                         <input type="hidden" id="eid" name="eid" value="">
                         <div class="form-group">
-                            <!-- subject name-->
-                            <label for="editSubjectName">Subject Name</label>
-                            <input class="form-control" required="" value="" id="editSubjectName" name="editSubjectName"
-                                placeholder="Enter the subject name" />
+                            <label for="editCourseName">Course Name</label>
+                            <input class="form-control" required="" value="" id="editCourseName" name="editCourseName"
+                                placeholder="Enter the course name" />
                             <br>
                         </div>
 
@@ -164,8 +162,7 @@ if (isset($_SESSION["id"])) {?>
     </div>
 </div>
 
-
-<div class="modal fade" id="deleteSubject" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="deleteCourse" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="overlay-loading">
@@ -190,7 +187,7 @@ if (isset($_SESSION["id"])) {?>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="getDeleteSubject">
+                    <form id="getDeleteCourses">
                         <input type="hidden" id="did" name="did" value="">
                         <h5 class="text-danger"> Are you sure you want to delete this record?</h5>
                         <div class="modal-footer">

@@ -167,6 +167,16 @@ if (isset($_SESSION["id"])) {?>
                                 </select>
                                 <br>
                             </div>
+
+                            <div class="form-group col-4">
+                                <label for="position">Staff's Subject</label>
+                                <select class="form-select" id="Subject" name="Subject" aria-label="Default select example">
+                                    <optgroup label="Select Subject">
+                                        <?php getitems('subjects');?>
+                                    </optgroup>
+                                </select>
+                                <br>
+                            </div>
                             <!--
                             <div class="form-group col-8">
                                 <label for="Phone">Staff's Email</label>
@@ -308,7 +318,7 @@ if (isset($_SESSION["id"])) {?>
                 </div>
                 <div class="modal-body">
                     <form id="getDeleteStaff">
-                        <input type="hidden" name="did" value="">
+                        <input type="hidden" id="did" name="did" value="">
                         <h5 class="text-danger"> Are you sure you want to delete this record?</h5>                        <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             <input type="submit" name="deleteSubmit" class="btn btn-danger" value="Delete Record"/>

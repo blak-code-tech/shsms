@@ -80,14 +80,28 @@
                                 # code...
                                 $getPass = encrypt_decrypt($user['Passwords'],'decrypt');
                                 if ($pass === $getPass) {
-                                    # code...
-                                    $_SESSION['UserType'] = 'staff';
                                     $_SESSION['id'] = $user['StaffID'];
                                     $_SESSION['fname'] = $user['FirstName'];	
                                     $_SESSION['lname'] = $user['LastName'];
                                     $_SESSION['email'] = $user['Email'];	
                                     $_SESSION['phone'] = $user['Phone'];
                                     $_SESSION['pass'] = $user['Passwords'];
+                                    $_SESSION['position'] = $user['Position'];
+                                    $_SESSION['subject'] = $user['Subject'];
+
+
+                                    if($_SESSION['position'] == 1){
+                                        $_SESSION['UserType'] = getitem('positions', $user['Position']);
+                                    }
+                                    else if($_SESSION['position'] == 2){
+                                        $_SESSION['UserType'] = getitem('positions', $user['Position']);
+                                    }
+                                    else if($_SESSION['position'] == 3){
+                                        $_SESSION['UserType'] = getitem('positions', $user['Position']);
+                                    }
+                                    else{
+                                        $_SESSION['UserType'] = 'Guest';
+                                    }
                                 }
                                 else{
                                     $msg = 'Incorrect password.';
@@ -99,7 +113,7 @@
                             }
             
                             if (isset($_SESSION['id'])) {
-                                header("Location: dashboard.php");
+                                header("Location: home.php");
                                 ob_end_flush();
                                 mysqli_close($conn);
                             }	
@@ -136,7 +150,7 @@
                     }
     
                     if (isset($_SESSION['id'])) {
-                        header("Location: dashboard.php");
+                        header("Location: home.php");
                         ob_end_flush();
                         mysqli_close($conn);
                     }	

@@ -8,6 +8,7 @@ if (isset($_POST['eid'])) {
     $eid = $_POST['eid'];
     $category = $_POST['editCategory'];
     $score = $_POST['editScore'];
+    $subject = $_POST['editSubject'];
     $grade = $_POST['editGrade'];
     $date = date("Y-m-d");
     $gradedBy = $_SESSION['fname'].' '. $_SESSION['lname'].'('.$_SESSION['UserType'].')';

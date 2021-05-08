@@ -54,13 +54,14 @@ if (isset($_SESSION["id"])) {?>
         <?php endif?>
 
         <div id="toolbar">
-            <?php $user = $_SESSION['UserType']; if($user == 'admin' || $user === 'teacher'):?>
+            <?php $user = $_SESSION['UserType']; if($user !== 'student'):?>
             <!-- Button trigger modal -->
             <a data-bs-toggle="modal" data-bs-target="#addExamResults" type="button" class="btn btn-primary mx-2">
                 Add New Result
             </a>
             <?php endif;?>
         </div>
+
         <table data-toggle="table" data-search="true" data-filter-control="true" data-click-to-select="true"
             data-pagination="true" data-search-align="left" data-show-toggle="true" data-show-refresh="true"
             data-show-fullscreen="true" data-show-pagination-switch="true" data-pagination-pre-text="Previous"
@@ -100,10 +101,8 @@ if (isset($_SESSION["id"])) {?>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-
                     <form id="getAddResults">
                         <div class="row">
-
                             <div class="form-group col-6">
                                 <label for="RegNo">Students ID</label>
                                 <input list="datalistOptions" required class="form-control" name="RegNo" id="RegNo"
@@ -123,7 +122,28 @@ if (isset($_SESSION["id"])) {?>
                                 <br>
                             </div>
 
-                            <div class="form-group col-6">
+                            <?php if($user === 'admin' || $user === 'Head Teacher' || $user === 'Assistant Head Teacher'): ?>
+                            <div class="form-group col-4">
+                                <label for="Subject">Subject</label>
+                                <select class="form-select" id="Subject" name="Subject"
+                                    aria-label="Default select example">
+                                    <option class="p-2" disabled selected hidden>Select Subject</option>
+                                    <?php getitems('subjects');?>
+                                </select>
+                                <br>
+                            </div>
+                            <?php elseif($user === 'Teacher') : ?>
+                            <div class="form-group col-4">
+                                <label for="Subject">Subject</label>
+                                <input class="form-control" required disabled id="Subject"
+                                    value="<?php echo getitem('subjects',$_SESSION['subject']); ?>" name="Subject"
+                                    placeholder="Enter the score out of 100%" />
+                                <input id="SubjectID" name="SubjectID" disabled hidden
+                                    value="<?php echo $_SESSION['subject']; ?>" />
+                                <br>
+                            </div>
+                            <?php endif; ?>
+                            <div class="form-group col-4">
                                 <label for="Score">Student's Score</label>
                                 <input class="form-control" required="" id="Score"
                                     title="Make sure there are at most 3 digits." type="number" name="Score"
@@ -131,7 +151,7 @@ if (isset($_SESSION["id"])) {?>
                                 <br>
                             </div>
 
-                            <div class="form-group col-6">
+                            <div class="form-group col-4">
                                 <label for="Grade">Grade</label>
                                 <input class="form-control" disabled required="" id="Grade" name="Grade"
                                     placeholder="Students Grade" />
@@ -191,8 +211,8 @@ if (isset($_SESSION["id"])) {?>
                             </div>
 
                             <div class="form-group col-6">
-                                <label for="hostel">Exam Category</label>
-                                <select class="form-select" id="editCategory" name="editCategory"
+                                <label>Exam Category</label>
+                                <select class="form-select" id="editCategory" disabled name="editCategory"
                                     aria-label="Default select example">
                                     <option class="p-2" disabled selected>Select Category</option>
                                     <?php getitems('examcategory');?>
@@ -268,10 +288,9 @@ if (isset($_SESSION["id"])) {?>
             </div>
         </div>
     </div>
+</div>
 
 
-
-    <?php include('inc/footers/mainFooter.php')?>
-    <?php include('inc/foots/mainFoot.php')?>
-    <?php
-}else header("Location: index.php");?>
+<?php include('inc/footers/mainFooter.php')?>
+<?php include('inc/foots/mainFoot.php')?>
+<?php }else header("Location: index.php");?>

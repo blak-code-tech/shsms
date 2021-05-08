@@ -1,5 +1,6 @@
 
- <?php  include 'config/db.php'; ?>
+ <?php  include 'config/db.php';
+ $user = $_SESSION['UserType']; ?>
         
         <thead>
             <tr>
@@ -13,7 +14,7 @@
         
                     $num = 0;
         
-                    $query = "SELECT * FROM subjects";
+                    $query = "SELECT * FROM courses";
         
                     $check = mysqli_query($conn, $query);
         
@@ -27,12 +28,12 @@
                             <tr class="p-1">
                                 <td class="p-2"><?php echo $row["ID"];?></td>
                                 <td class="p-2"><?php echo $row["Name"];?></td> 
-                                <?php if(isset($_SESSION['UserType']) && $_SESSION['UserType'] == 'admin'):?>
+                                <?php if($user === 'admin' || $user === 'Teacher' || $user === 'Head Teacher' || $user === 'Assistant Head Teacher'):?>
                                 <td class="p-2">
                                     <div class="col">
                                         <div class="btn-group" role="group">
-                                            <a data-bs-toggle="modal" data-subjectid="<?php echo $row["ID"]; ?>" href="subjects.php#editSubject"><i class="fa fa-pencil p-1"></i></a>
-                                            <a data-bs-toggle="modal" data-subjectid="<?php echo $row["ID"]; ?>" href="subjects.php#deleteSubject"><i class="fa fa-trash text-danger p-1"></i></a>
+                                            <a data-bs-toggle="modal" data-courseid="<?php echo $row["ID"]; ?>" href="courses.php#editCourse"><i class="fa fa-pencil p-1"></i></a>
+                                            <a data-bs-toggle="modal" data-courseid="<?php echo $row["ID"]; ?>" href="courses.php#deleteCourse"><i class="fa fa-trash text-danger p-1"></i></a>
                                         </div>
                                     </div>
         

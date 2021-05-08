@@ -26,6 +26,7 @@
                 $myObj[] = $row['DOB'];
                 $myObj[] = $row['HostelID'];
                 $myObj[] = $row['ClassID'];
+                $myObj[] = $row['CourseID'];
 
                 $myJSON = json_encode($myObj);
 
@@ -104,15 +105,26 @@
 
                     <form id="getAddStudent">
 
-                        <!-- Registration Number-->
-                        <div class="form-group">
-                            <label for="studentID">Student's ID number</label>
-                            <input class="form-control" type="text" value="<?php generateRegNo();?>" readonly
-                                placeholder="Reg no." id="StudentID" name="StudentID">
-                            <br>
-                        </div>
-
                         <div class="row">
+                            <!-- Registration Number-->
+                            <div class="form-group col-6">
+                                <label for="studentID">Student's ID number</label>
+                                <input class="form-control" type="text" value="<?php generateRegNo();?>" readonly
+                                    placeholder="Reg no." id="StudentID" name="StudentID">
+                                <br>
+                            </div>
+
+                            <!-- Course-->
+                            <div class="form-group col-6">
+                                <label for="course">Student's Course</label>
+                                <select class="form-select" id="Course" name="Course"
+                                    aria-label="Default select example">
+                                    <option class="p-2" disabled selected>Select Course</option>
+                                    <?php getitems('courses');?>
+                                </select>
+                                <br>
+                            </div>
+
                             <!-- First name-->
                             <div class="form-group col-4">
                                 <label for="firstname">Student's First Name</label>
@@ -268,15 +280,26 @@
                     <form id="getEditStudent">
 
                         <input type="hidden" id="eid" name="eid" value="">
+                    
+                        <div class="row">
                         <!-- Registration Number-->
-                        <div class="form-group">
+                        <div class="form-group col-6">
                             <label for="regNo">Student's Registration number</label>
                             <input class="form-control" type="text" readonly placeholder="StudentID"
                                 name="editStudentID">
                             <br>
                         </div>
 
-                        <div class="row">
+                        <!-- Course-->
+                        <div class="form-group col-6">
+                                <label for="editcourse">Student's Course</label>
+                                <select class="form-select" id="editCourse" name="editCourse"
+                                    aria-label="Default select example">
+                                    <option class="p-2" disabled selected>Select Course</option>
+                                    <?php getitems('courses');?>
+                                </select>
+                                <br>
+                            </div>
                             <!-- First name-->
                             <div class="form-group col-4">
                                 <label for="editFirstName">Student's First Name</label>
@@ -362,6 +385,13 @@
                     </div>
                 </div>
                 <p class="text-center lead text-secondary"><strong>Cleaning Up ...</strong></p>
+            </div>
+            <div class="overlay-results">
+                <div class="text-center">
+                    <i class="fa fa-check bg-success align-middle text-light p-3 mt-4 mb-2" style="font-size:50px;border-radius:60px;"></i>
+                    <p class="lead text-success mb-5"><strong>Record Deleted Successfully...</strong></p>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Return to page</button>
+                </div>
             </div>
             <div class="modalContent">
                 <div class="modal-header">

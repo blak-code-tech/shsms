@@ -13,10 +13,11 @@ if(isset($_POST['StaffID'])){
     $email = generateEmail($fname,$lname,$conn,'staff');
     $phone = $_POST['Phone'];
     $position = $_POST['Position'];
+    $subject = $_POST['Subject'];
     $pass = encrypt_decrypt('pass', 'encrypt');
     
-    $query = "INSERT INTO `staff`(`StaffID`,`FirstName`, `LastName`,`Position`, `Gender`, `DOB`, `Email`, `Phone`, `Passwords`) 
-    VALUES ('$id','$fname','$lname',$position,'$gender','$dob','$email','$phone','$pass')";
+    $query = "INSERT INTO `staff`(`StaffID`,`FirstName`, `LastName`,`Position`,`Subject`, `Gender`, `DOB`, `Email`, `Phone`, `Passwords`) 
+    VALUES ('$id','$fname','$lname',$position,$subject,'$gender','$dob','$email','$phone','$pass')";
     
     $check = mysqli_query($conn, $query);
 

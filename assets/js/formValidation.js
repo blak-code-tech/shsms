@@ -39,7 +39,7 @@ $('#addBank').on('submit',function(e){
                 $('#BankName').val('');
                 $('#accNo').val('');
                 overlay.hide();
-                form.show();
+                displayResults.show();
                 }, 2000);
         }
         else{
@@ -54,8 +54,6 @@ $('#addBank').on('submit',function(e){
                 }, 2000);
         }
         
-        
-        //$(e.currentTarget).find('input[name="eid"]').val(results[0])
     };
 
     xmlhttp.open("POST", "http://localhost/shsms/inc/addforms/addBanks.php", true);
@@ -69,7 +67,6 @@ $('#getEditBank').on('submit',function(e){
     e.preventDefault();
 
     var msg = $('.message');
-    var displayResults = $('.overlay-results');
     var overlay = $('.overlay-loading');
     var form = $('.modalContent');
     msg.html('');
@@ -94,9 +91,7 @@ $('#getEditBank').on('submit',function(e){
                 $('#BankName').val('');
                 $('#accNo').val('');
                 overlay.hide();
-                //form.show();
                 displayResults.show();
-                //window.location.reload();
                 }, 2000);
             
         }
@@ -245,7 +240,7 @@ $('#getAddSubject').on('submit',function(e){
             setTimeout(function(){ 
                 $('#SubjectName').val('');
                 overlay.hide();
-                form.show();
+                displayResults.show();
                 }, 2000);
         }
         else{
@@ -274,7 +269,6 @@ $('#getEditSubject').on('submit',function(e){
     e.preventDefault();
 
     var msg = $('.message');
-    var displayResults = $('.overlay-results');
     var overlay = $('.overlay-loading');
     var form = $('.modalContent');
     msg.html('');
@@ -410,6 +404,204 @@ $('#deleteSubject').on('show.bs.modal', function(e) {
 });
 /********************************************************************* */
 
+
+/****************Courses ************************/
+//Add a Course
+$('#getAddCourse').on('submit',function(e){
+    e.preventDefault();
+
+    var overlay = $('.overlay-loading');
+    var mainForm = $('#getAddCourse');
+    var form = $('.modalContent');
+    var xmlhttp = new XMLHttpRequest();
+    var params = "CourseName="+$('#CourseName').val();
+
+    xmlhttp.onprogress = function(){
+        overlay.show();
+        console.log(params);
+        form.hide();
+    };
+
+    xmlhttp.onload = function() {
+        var results = xmlhttp.responseText;
+        results = results.substring(results.indexOf("}")+1, results.indexOf(".")+1);
+
+        if(results.includes('OK')){
+            // Check if an element currently exists
+            if (!$('#successCheck').length) {
+                var successAlert = '<div id="successCheck" class="alert alert-success alert-dismissible" role="alert">Subject Added Successfully..<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
+                mainForm.before(successAlert);
+            }
+            setTimeout(function(){ 
+                $('#CourseName').val('');
+                overlay.hide();
+                displayResults.show();
+                }, 2000);
+        }
+        else{
+            // Check if an element currently exists
+            if (!$('#sqlError').length) {
+                var errorAlert = '<div id="sqlError" class="alert alert-danger alert-dismissable" role="alert">'+results+'<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
+                mainForm.before(errorAlert);
+            }
+            setTimeout(function(){
+                overlay.hide();
+                form.show();
+                }, 2000);
+        }
+        
+    
+    };
+
+    xmlhttp.open("POST", "http://localhost/shsms/inc/addforms/addCourses.php", true);
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.send(params);
+
+});
+
+//edit a Course
+$('#getEditCourse').on('submit',function(e){
+    e.preventDefault();
+
+    var msg = $('.message');
+    var displayResults = $('.overlay-results');
+    var overlay = $('.overlay-loading');
+    var form = $('.modalContent');
+    msg.html('');
+    var xmlhttp = new XMLHttpRequest();
+    var params = "eid="+$('#eid').val()+"&editCourseName="+$('#editCourseName').val();
+
+    xmlhttp.onprogress = function(){
+        overlay.show();
+        form.hide();
+    };
+
+    xmlhttp.onload = function() {
+        var results = xmlhttp.responseText;
+
+        if(results.includes('OK.')){
+            msg.addClass('alert-success');
+            msg.append('Course Updated Successfully..');
+            msg.show();
+            setTimeout(function(){ 
+                $('#editCourseName').val('');
+                overlay.hide();
+                displayResults.show();
+                }, 2000);
+            
+        }
+        else{
+            msg.addClass('alert-danger');
+            msg.append(results);
+            msg.show();
+            setTimeout(function(){
+                overlay.hide();
+                form.show();
+                }, 2000);
+        }
+        
+    };
+
+    xmlhttp.open("POST", "http://localhost/shsms/inc/editforms/editCourses.php", true);
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.send(params);
+
+});
+
+$('#getDeleteCourse').on('submit',function(e){
+    e.preventDefault();
+
+    var msg = $('.message');
+    var overlay = $('.overlay-loading');
+    var displayResults = $('.overlay-results');
+    var form = $('.modalContent');
+    msg.html('');
+    var xmlhttp = new XMLHttpRequest();
+    var params = "did="+$('#did').val();
+
+    xmlhttp.onprogress = function(){
+        overlay.show();
+        form.hide();
+    };
+
+    xmlhttp.onload = function() {
+        var results = xmlhttp.responseText;
+
+        if(results.includes('OK')){
+            msg.addClass('alert-success');
+            msg.append('Record Deleted Successfully..');
+            msg.show();
+            setTimeout(function(){ 
+                overlay.hide();
+                displayResults.show();
+                }, 2000);
+        }
+        else{
+            msg.addClass('alert-danger');
+            msg.append(results);
+            msg.show();
+            setTimeout(function(){
+                overlay.hide();
+                displayResults.show();
+                form.show();
+                }, 2000);
+        }
+        
+    };
+
+    xmlhttp.open("POST", "http://localhost/shsms/inc/deleteforms/deleteCourses.php", true);
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.send(params);
+
+});
+
+//reload page
+$('#addCourse').on('hidden.bs.modal', function(e) {
+    
+    window.location.reload();
+
+});
+
+$('#editCourse').on('hidden.bs.modal', function(e) {
+    
+    window.location.reload();
+
+});
+
+$('#deleteCourse').on('hidden.bs.modal', function(e) {
+    
+    window.location.reload();
+
+});
+
+//fetch data to fill form
+$('#editCourse').on('show.bs.modal', function(e) {
+    var courseId = $(e.relatedTarget).data('courseid');
+    console.log(courseId);
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            var results = xmlhttp.responseText;
+            results = results.substring(results.indexOf("["), results.indexOf("]")+1);
+            results = JSON.parse(results);
+            $(e.currentTarget).find('input[name="eid"]').val(results[0]);
+            $(e.currentTarget).find('input[name="editCourseName"]').val(results[1]);
+        }
+
+    };
+    xmlhttp.open("GET", "courses.php?eid=" + courseId, true);
+    xmlhttp.send();
+    
+});
+
+//fetch id to delete
+$('#deleteCourse').on('show.bs.modal', function(e) {
+    var courseId = $(e.relatedTarget).data('courseid');
+    $(e.currentTarget).find('input[name="did"]').val(courseId);
+});
+/********************************************************************* */
+
+
 /****************Classes ************************/
 //Add a Class
 $('#getAddClass').on('submit',function(e){
@@ -441,7 +633,7 @@ $('#getAddClass').on('submit',function(e){
             setTimeout(function(){ 
                 $('#ClassName').val('');
                 overlay.hide();
-                form.show();
+                displayResults.show();
                 }, 2000);
         }
         else{
@@ -470,7 +662,6 @@ $('#getEditClass').on('submit',function(e){
     e.preventDefault();
 
     var msg = $('.message');
-    var displayResults = $('.overlay-results');
     var overlay = $('.overlay-loading');
     var form = $('.modalContent');
     msg.html('');
@@ -640,7 +831,7 @@ $('#getAddHostel').on('submit',function(e){
                 $('#Name').val('');
                 $('#Status').val('');
                 overlay.hide();
-                form.show();
+                displayResults.show();
                 }, 2000);
         }
         else{
@@ -816,7 +1007,6 @@ $('#getAddStudent').on('submit',function(e){
 
     var msg = $('.message');
     var overlay = $('.overlay-loading');
-    var displayResults = $('.overlay-results');
     var form = $('.modalContent');
     var mainForm = $('#getAddStudent');
     msg.html('');
@@ -828,6 +1018,7 @@ $('#getAddStudent').on('submit',function(e){
     "&Class="+$('#Class').val()+
     "&Gender="+$('#Gender').val()+
     "&Hostel="+$('#Hostel').val()+
+    "&Course="+$('#Course').val()+
     "&ParentsFirstName="+$('#ParentsFirstName').val()+
     "&ParentsLastName="+$('#ParentsLastName').val()+
     "&parentEmail="+$('#parentEmail').val()+
@@ -1078,8 +1269,9 @@ $('#editStudent').on('show.bs.modal', function(e) {
             $(e.currentTarget).find('input[name="editLastName"]').val(results[2]);
             $(e.currentTarget).find('select[name="editGender"]').val(results[3]);
             $(e.currentTarget).find('input[name="editDOB"]').val(results[4]);
-            $(e.currentTarget).find('select[name="editHostelID"]').val(results[5]);
-            $(e.currentTarget).find('select[name="editClassID"]').val(results[6]);
+            $(e.currentTarget).find('select[name="editHostel"]').val(results[5]);
+            $(e.currentTarget).find('select[name="editClass"]').val(results[6]);
+            $(e.currentTarget).find('select[name="editCourse"]').val(results[7]);
         }
 
     };
@@ -1116,6 +1308,7 @@ $('#getAddStaff').on('submit',function(e){
     "&DOB="+$('#DOB').val()+
     "&Gender="+$('#Gender').val()+
     "&Phone="+$('#Phone').val()+
+    "&Subject="+$('#Subject').val()+
     "&Position="+$('#Position').val();
 
     var date = new Date();
@@ -1378,8 +1571,8 @@ $('#editStaff').on('show.bs.modal', function(e) {
 
 //fetch id to delete
 $('#deleteStaff').on('show.bs.modal', function(e) {
-    var teacherId = $(e.relatedTarget).data('teacherid');
-    $(e.currentTarget).find('input[name="did"]').val(teacherId);
+    var staffId = $(e.relatedTarget).data('staffid');
+    $(e.currentTarget).find('input[name="did"]').val(staffId);
 });
 
 /********************************************************************* */
@@ -1683,6 +1876,7 @@ $('#getAddResults').on('submit',function(e){
     var params = "RegNo="+$('#RegNo').val()+
     "&Category="+$('#Category').val()+
     "&Score="+$('#Score').val()+
+    "&Subject="+$('#SubjectID').val()+
     "&Grade="+$('#Grade').val();
 
     var score = $('#Score').val();
@@ -1711,7 +1905,7 @@ $('#getAddResults').on('submit',function(e){
             else{
                 // Check if an element currently exists
                 if (!$('#sqlError').length) {
-                    var errorAlert = '<div id="sqlError" class="alert alert-danger alert-dismissable" role="alert">'+results+'<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
+                    var errorAlert = '<div id="sqlError" class="alert alert-danger alert-dismissable" role="alert">'+ results +'<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
                     mainForm.before(errorAlert);
                 }
                 setTimeout(function(){
@@ -1805,12 +1999,12 @@ $('#getDeleteResults').on('submit',function(e){
 
     var msg = $('.message');
     var overlay = $('.overlay-loading');
-    var displayResults = $('.overlay-results');
     var form = $('.modalContent');
     msg.html('');
     var xmlhttp = new XMLHttpRequest();
     var params = "did="+$('#did').val();
 
+    console.log(params);
     xmlhttp.onprogress = function(){
         overlay.show();
         form.hide();
@@ -1818,7 +2012,7 @@ $('#getDeleteResults').on('submit',function(e){
 
     xmlhttp.onload = function() {
         var results = xmlhttp.responseText;
-        
+        console.log(results);
         if(results.includes('OK')){
             msg.addClass('alert-success');
             msg.append('Record Deleted Successfully..');
@@ -1888,7 +2082,7 @@ $('#editExamResults').on('show.bs.modal', function(e) {
 
 //fetch id to delete
 $('#deleteExamResults').on('show.bs.modal', function(e) {
-    var examresultsId = $(e.relatedTarget).data('examresultid');
+    var examresultsId = $(e.relatedTarget).data('examresultsid');
     $(e.currentTarget).find('input[name="did"]').val(examresultsId);
 });
 
