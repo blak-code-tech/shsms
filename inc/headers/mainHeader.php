@@ -5,12 +5,12 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <link rel="icon" type="image/png" href="assets/img/favicon.png"/>
+    <link rel="icon" type="image/png" href="assets/img/favicon.png" />
     <title>Edukate</title>
-    
+
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="fonts/font-awesome-4.7.0/css/font-awesome.css">
-    <link rel="stylesheet" href="assets/css/bootstrap-table-materialize.css">
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css">
     <link rel="stylesheet" href="assets/css/aos.css">
     <link rel="stylesheet" href="assets/css/hover.css">
     <!--
@@ -21,90 +21,95 @@
 	<link rel="stylesheet" type="text/css" href="css/main.css">-->
 
     <style>
-        .navbar-brand{
-            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-        }
-        .navbar-brand.bg{
-            color: #222;
-            width: 140px;
-            padding: 5px;
-            transition: all 0.5s;
-        }
+    .navbar-brand {
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
 
-        .navbar-brand.bg:hover{
-            background-color: #222;
-            color: #fdfdfd;
-            border-radius:0 20px 0 20px;
-            transition: all 0.5s;
-        }
-        .main {
-            background: #FFF;
-            position: relative;
-            z-index: 3;
-        }
+    .navbar-brand.bg {
+        color: #222;
+        width: 140px;
+        padding: 5px;
+        transition: all 0.5s;
+    }
 
-        .profile-page .profile {
-            text-align: center;
-        }
+    .navbar-brand.bg:hover {
+        background-color: #222;
+        color: #fdfdfd;
+        border-radius: 0 20px 0 20px;
+        transition: all 0.5s;
+    }
 
-        .profile-page .profile img {
-            max-width: 160px;
-            width: 100%;
-            margin: 0 auto;
-            -webkit-transform: translate3d(0,-50%,0);
-            -moz-transform: translate3d(0,-50%,0);
-            -o-transform: translate3d(0,-50%,0);
-            -ms-transform: translate3d(0,-50%,0);
-            transform: translate3d(0,-50%,0);
-        }
+    .main {
+        background: #FFF;
+        position: relative;
+        z-index: 3;
+    }
 
-        .img-raised {
-            box-shadow: 0 5px 15px -8px rgba(0,0,0,.24), 0 8px 10px -5px rgba(0,0,0,.2);
-        }
+    .profile-page .profile {
+        text-align: center;
+    }
 
-        .rounded-circle {
-            border-radius: 50%!important;
-        }
+    .profile-page .profile img {
+        max-width: 160px;
+        width: 100%;
+        margin: 0 auto;
+        -webkit-transform: translate3d(0, -50%, 0);
+        -moz-transform: translate3d(0, -50%, 0);
+        -o-transform: translate3d(0, -50%, 0);
+        -ms-transform: translate3d(0, -50%, 0);
+        transform: translate3d(0, -50%, 0);
+    }
 
-        .overlay-loading, .overlay-results{
-            height:100%;
-            width:100%;
-            border-radius: 60px;
-            padding:0 50px 50px 50px;
-            display:none;
-            transition: all 0.5s;
-            background-color: white;
-        }
+    .img-raised {
+        box-shadow: 0 5px 15px -8px rgba(0, 0, 0, .24), 0 8px 10px -5px rgba(0, 0, 0, .2);
+    }
 
-        .modalContent{
-            transition: all 0.5s;
-        }
+    .rounded-circle {
+        border-radius: 50% !important;
+    }
 
-        /* CUSTOMIZE THE CAROUSEL
+    .overlay-loading,
+    .overlay-results {
+        height: 100%;
+        width: 100%;
+        border-radius: 60px;
+        padding: 0 50px 50px 50px;
+        display: none;
+        transition: all 0.5s;
+        background-color: white;
+    }
+
+    .modalContent {
+        transition: all 0.5s;
+    }
+
+    /* CUSTOMIZE THE CAROUSEL
 -------------------------------------------------- */
 
-        /* Carousel base class */
-        .carousel {
-            width: 100%;
-            height: 100%;
-            margin-bottom: 4rem;
-        }
-        /* Since positioning the image, we need to help out the caption */
-        .carousel-caption {
+    /* Carousel base class */
+    .carousel {
+        width: 100%;
+        height: 100%;
+        margin-bottom: 4rem;
+    }
+
+    /* Since positioning the image, we need to help out the caption */
+    .carousel-caption {
         bottom: 3rem;
         z-index: 10;
-        }
+    }
 
-        /* Declare heights because of positioning of img element */
-        .carousel-item {
+    /* Declare heights because of positioning of img element */
+    .carousel-item {
         height: 32rem;
-        }
-        .carousel-item > img {
-            width: 100%;
-            height: auto;
-            background-size: contain;
-            display: block;
-        }
+    }
+
+    .carousel-item > img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+    
     </style>
 </head>
 
