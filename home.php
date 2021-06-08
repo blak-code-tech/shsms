@@ -7,72 +7,74 @@ require('config/db.php');
 
 <?php include('inc/navbars/mainNavbar.php')?>
 
-<header class="container mt-5 pt-5 col-8">
-    <h1 class="text-center text-muted" data-aos="zoom-in" data-aos-duration="500" style="font-size:50px;">Home</h1>
+<header class="container mt-5 pt-5 mx-auto">
+    <h1 class="text-center text-muted" data-aos="zoom-in" data-aos-anchor-placement="center-bottom"
+        data-aos-duration="500" style="font-size:50px;">Home</h1>
     <hr class="container col-xxl-8">
 </header>
 <main>
-    <div id="myCarousel" class="carousel carousel-fade slide col-xxl-8 px-4 pt-3" data-bs-ride="carousel">
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true"
-                aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-        </div>
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="assets/img/2.jpg" alt="img1">
-                <div class="container">
-                    <div class="carousel-caption text-start">
-                        <h1>Students Championship</h1>
-                        <p>Be a winner of a laptop to aid in your studies. READY??</p>
-                        <button class="btn btn-primary">JOIN NOW !!</button>
+    <div class="container">
+        <div id="myCarousel" data-aos="fade-up" data-aos-anchor-placement="top-bottom"
+            class="carousel carousel-fade slide my-5" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="assets/img/2.jpg" alt="img1">
+                    <div class="container">
+                        <div class="carousel-caption text-start">
+                            <h1>Students Championship</h1>
+                            <p>Be a winner of a laptop to aid in your studies. READY??</p>
+                            <button class="btn btn-primary">JOIN NOW !!</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="carousel-item">
-                <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-                    <rect width="100%" height="100%" fill="#777" />
-                </svg>
+                <div class="carousel-item">
+                    <img src="assets/img/carousel2.jpg" alt="img1">
 
-                <div class="container">
-                    <div class="carousel-caption">
-                        <h1>Another example headline.</h1>
-                        <p>Some representative placeholder content for the second slide of the carousel.</p>
-                        <p><a class="btn btn-lg btn-primary" href="#">Learn more</a></p>
+                    <div class="container">
+                        <div class="carousel-caption">
+                            <h1>Another example headline.</h1>
+                            <p>Some representative placeholder content for the second slide of the carousel.</p>
+                            <p><a class="btn btn-lg btn-primary" href="#">Learn more</a></p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="carousel-item">
-                <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-                    <rect width="100%" height="100%" fill="#777" />
-                </svg>
+                <div class="carousel-item">
+                    <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+                        <rect width="100%" height="100%" fill="#777" />
+                    </svg>
 
-                <div class="container">
-                    <div class="carousel-caption text-end">
-                        <h1>One more for good measure.</h1>
-                        <p>Some representative placeholder content for the third slide of this carousel.</p>
-                        <p><a class="btn btn-lg btn-primary" href="#">Browse gallery</a></p>
+                    <div class="container">
+                        <div class="carousel-caption text-end">
+                            <h1>One more for good measure.</h1>
+                            <p>Some representative placeholder content for the third slide of this carousel.</p>
+                            <p><a class="btn btn-lg btn-primary" href="#">Browse gallery</a></p>
+                        </div>
                     </div>
                 </div>
             </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
     </div>
+
     <div class="container col-xxl-8 px-4 pt-3">
-        <hr>
+
         <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
             <div class="col-10 col-sm-8 col-lg-6">
-                <img src="assets/img/carousel1.jpg" data-aos="zoom-in-up" class="d-block mx-lg-auto img-fluid"
+                <img src="assets/img/carousel1.jpg" data-aos="zoom-in-left" class="d-block mx-lg-auto img-fluid"
                     width="700" height="500" loading="lazy">
             </div>
             <div class="col-lg-6">
@@ -84,7 +86,7 @@ require('config/db.php');
                     Leadership - Building capacity for young and vibrant African leaders
                     Innovation - Creating avenue for prototyping and innovation through teamwork.</p>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-                    <button type="button" class="btn btn-outline-primary btn-mdi px-4" data-aos-delay="500"
+                    <button type="button" class="btn btn-outline-primary btn-mdi px-4" data-aos-delay="300"
                         data-aos="zoom-out">Read more..</button>
                 </div>
             </div>
@@ -92,22 +94,36 @@ require('config/db.php');
 
         <div class="row flex-lg-row align-items-center g-5 py-5">
             <div class="col-10 col-sm-8 col-lg-6">
-                <img src="assets/img/carousel1.jpg" data-aos="zoom-in-up" class="d-block mx-lg-auto img-fluid"
+                <img src="assets/img/tech.jpg" data-aos="zoom-in-right" class="d-block rounded-3 mx-lg-auto img-fluid"
                     width="700" height="500" loading="lazy">
             </div>
             <div class="col-lg-6">
-                <h1 class="display-5 fw-bold lh-1 mb-3" data-aos="fade-up" data-aos-duration="500">Welcome to Edukate.
-                </h1>
+                <h1 class="display-5 fw-bold lh-1 mb-3" data-aos="fade-up" data-aos-duration="500">Learn to Code.</h1>
+                <h5 class="text-muted" data-aos="fade-up" data-aos-delay="100" data-aos-duration="500">HTML, CSS, JS,
+                    PHP and More</h5>
                 <p class="lead" data-aos="fade-up" data-aos-delay="200">Edukate aims to promote good 'Edukation'. By
                     bridging the gap between rich and poor to support a common goal - Growing the African Human resource
                     -
                     Leadership - Building capacity for young and vibrant African leaders
                     Innovation - Creating avenue for prototyping and innovation through teamwork.</p>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-                    <button type="button" class="btn btn-outline-primary btn-mdi px-4" data-aos-delay="500"
+                    <button type="button" class="btn btn-outline-primary btn-mdi px-4" data-aos-delay="300"
                         data-aos="zoom-out">Read more..</button>
                 </div>
             </div>
+        </div>
+
+        <div class="bg-dark rounded-pill">
+            <figure class="text-center my-5 py-5 text-light">
+                <h4>QOUTE OF THE DAY.</h4>
+                <hr style="width: 10%; height:0.5em;"class="mx-auto text-primary">
+                <blockquote class="blockquote">
+                    <p>The beautiful thing about learning is that no one can take it away from you.</p>
+                </blockquote>
+                <figcaption class="blockquote-footer">
+                B. B. King
+                </figcaption>
+            </figure>
         </div>
     </div>
 </main>

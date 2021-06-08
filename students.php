@@ -49,20 +49,22 @@
 <div class="container py-3 justify-content-center">
 
     <div class="table-responsive text-center">
-        <div id="toolbar">
+        <div id="toolbar" pl-1>
             <!-- Button trigger modal -->
             <?php if(isset($_SESSION['UserType']) && $_SESSION['UserType'] == 'admin'):?>
             <a data-bs-toggle="modal" data-bs-target="#addStudent" type="button" href="addstudent.php"
-                class="btn btn-primary mx-2">
+                class="btn btn-primary">
                 Add New Student
             </a>
+
+            <button id="exportButton" class="btn btn-danger"><span class="fa fa-file-pdf-o"></span>
+                Export All To PDF</button>
             <?php endif; ?>
         </div>
         <table data-toggle="table" data-search="true" data-filter-control="true" data-click-to-select="true"
-            data-pagination="true" data-search-align="left" data-show-toggle="true" data-show-fullscreen="true"
-            data-show-pagination-switch="true" data-pagination-pre-text="Previous" data-pagination-next-text="next"
-            data-pagination-h-align="left" data-pagination-detail-h-align="right" data-page-list="[10,20,30,40,50,All]"
-            data-toolbar="#toolbar">
+            data-pagination="true" data-search-align="left" data-show-toggle="true" data-pagination-pre-text="Previous"
+            data-pagination-next-text="next" data-pagination-h-align="left" data-pagination-detail-h-align="right"
+            data-page-list="[10,20,30,40,50,All]" data-toolbar="#toolbar">
 
             <?php include 'inc/pages/studentsList.php';?>
 
@@ -280,18 +282,18 @@
                     <form id="getEditStudent">
 
                         <input type="hidden" id="eid" name="eid" value="">
-                    
-                        <div class="row">
-                        <!-- Registration Number-->
-                        <div class="form-group col-6">
-                            <label for="regNo">Student's Registration number</label>
-                            <input class="form-control" type="text" readonly placeholder="StudentID"
-                                name="editStudentID">
-                            <br>
-                        </div>
 
-                        <!-- Course-->
-                        <div class="form-group col-6">
+                        <div class="row">
+                            <!-- Registration Number-->
+                            <div class="form-group col-6">
+                                <label for="regNo">Student's Registration number</label>
+                                <input class="form-control" type="text" readonly placeholder="StudentID"
+                                    name="editStudentID">
+                                <br>
+                            </div>
+
+                            <!-- Course-->
+                            <div class="form-group col-6">
                                 <label for="editcourse">Student's Course</label>
                                 <select class="form-select" id="editCourse" name="editCourse"
                                     aria-label="Default select example">
@@ -388,7 +390,8 @@
             </div>
             <div class="overlay-results">
                 <div class="text-center">
-                    <i class="fa fa-check bg-success align-middle text-light p-3 mt-4 mb-2" style="font-size:50px;border-radius:60px;"></i>
+                    <i class="fa fa-check bg-success align-middle text-light p-3 mt-4 mb-2"
+                        style="font-size:50px;border-radius:60px;"></i>
                     <p class="lead text-success mb-5"><strong>Record Deleted Successfully...</strong></p>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Return to page</button>
                 </div>

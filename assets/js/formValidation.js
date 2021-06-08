@@ -2244,13 +2244,12 @@ $('#getEditFees').on('submit',function(e){
  * Add a print event to the profile page..
  */
 $("#btnReport").click(function() {
-    alert( "Handler for .click() called." );
-    var msg = "Name: "+$('#FirstName').val()+" "+$('#LastName').val()+"\nID: "+$('#StaffID').val() +"\n"+ "Email: " + email + "\n" + "Password: Pass";
+    var msg = "Testing pdf print..";
     doc.text(msg, 15, 15, {
         'width': 170,
             'elementHandlers': specialElementHandlers
     });
-    doc.save($('#StaffID').val()+'.pdf');
+    doc.save('test.pdf');
   });
 
 $('#getEditPass').on('submit',function(e){

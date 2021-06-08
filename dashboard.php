@@ -17,8 +17,8 @@ if (isset($_SESSION["id"])) {?>
     <hr class="container col-xxl-8">
 </header>
 
-<section id="dashboad-items" class="container-fluid px-5 py-3">
-    <div class="row row-cols-1 row-cols-md-4 g-4">
+<section id="dashboad-items" class="container-fluid px-5 py-3 mb-5">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
         <div class="col">
             <div class="card rounded-3 shadow" data-aos="fade-up" data-aos-duration="500">
                 <div class="card-body">
@@ -238,8 +238,7 @@ if (isset($_SESSION["id"])) {?>
 
 </section>
 
-<!--
-<section class="container-fluid px-5 py-3">
+<section class="container-fluid px-5 py-3 mb-5">
     <div class="card-group">
         <div class="card mb-4 mt-3 mx-2 rounded-3 shadow">
 
@@ -249,14 +248,14 @@ if (isset($_SESSION["id"])) {?>
                         <p class="text-muted lead" style="font-size:18px;">Fees collection by date</p>
                 </div>
                 <div class="table-responsize">
-                    <table class="table">
+                    <table class="table table-borderless">
                         <thead data-aos="fade-up" data-aos-duration="500">
                             <tr>
-                                <th class="lead">ID</th>
-                                <th class="lead">Student</th>
-                                <th class="lead">Amount</th>
-                                <th class="lead">Date</th>
-                                <th class="lead">Remarks</th>
+                                <th>ID</th>
+                                <th>Student</th>
+                                <th>Amount</th>
+                                <th>Date</th>
+                                <th>Remarks</th>
                             </tr>
                         </thead>
 
@@ -312,7 +311,7 @@ if (isset($_SESSION["id"])) {?>
             </div>
         </div>
     </div>
-</section>-->
+</section>
 
 <?php include('inc/footers/mainFooter.php')?>
 <?php include('inc/foots/mainFoot.php')?>

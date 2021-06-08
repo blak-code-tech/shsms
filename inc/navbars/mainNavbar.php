@@ -1,13 +1,13 @@
 <?php $user = $_SESSION['UserType']; ?>
 <nav class="navbar navbar-light shadow navbar-expand-lg fixed-top bg-white" id="myNavbar">
     <div class="container-fluid">
-        <a class="navbar-brand bg text-center" href="<?php echo ROOT_URL;?>"
-            style="font-size: 30px; font-weight: 700;">Edukate</a>
-        <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1">
-            <span class="sr-only">Toggle navigation</span>
+        <a class="navbar-brand bg text-center" href="<?php echo $_SERVER['PHP_SELF'];?>"
+            style="font-size: 30px; font-weight: 800;">Edukate</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01"
+            aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navcol-1">
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item"><a class="nav-link hvr-underline-from-center"
                         href="<?php echo ROOT_URL;?>home.php">Home</a></li>
@@ -21,7 +21,7 @@
                 <li class="nav-item"><a class="nav-link hvr-underline-from-center"
                         href="<?php echo ROOT_URL;?>staff.php">Staff</a></li>
                 <?php endif; ?>
-                
+
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
@@ -29,15 +29,12 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarDarkDropdownMenuLink">
 
-                        <li><a class="dropdown-item"
-                                href="<?php echo ROOT_URL;?>courses.php">Courses</a></li>
-                        <li><a class="dropdown-item"
-                                href="<?php echo ROOT_URL;?>subjects.php">Subjects</a></li>
-                        <li><a class="dropdown-item"
-                                href="<?php echo ROOT_URL;?>examresults.php">Exams Results</a></li>
+                        <li><a class="dropdown-item" href="<?php echo ROOT_URL;?>courses.php">Courses</a></li>
+                        <li><a class="dropdown-item" href="<?php echo ROOT_URL;?>subjects.php">Subjects</a></li>
+                        <li><a class="dropdown-item" href="<?php echo ROOT_URL;?>examresults.php">Exams Results</a></li>
                     </ul>
                 </li>
-                <!--
+
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
@@ -49,8 +46,8 @@
                         </li>
                         <li><a class="dropdown-item" href="<?php echo ROOT_URL;?>home.php">Fees Structure</a></li>
                     </ul>
-                </li> 
-            
+                </li>
+
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
@@ -59,8 +56,8 @@
                     <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarDarkDropdownMenuLink">
                         <li><a class="dropdown-item" href="<?php echo ROOT_URL;?>examresults.php">Results</a></li>
                     </ul>
-                </li> -->
-                
+                </li>
+
                 <?php if($user === 'admin'):?>
                 <li class="nav-item"><a class="nav-link hvr-underline-from-center"
                         href="<?php echo ROOT_URL;?>hostels.php">Hostels</a></li>
